@@ -1,17 +1,19 @@
 import { Router } from "express";
 import { Request, Response } from "express";
-import { prisma } from "@repo/db/client"
 import { authmiddleware } from "../middleware/auth";
+import { PrismaClient } from '@prisma/client';
+import dotenv from "dotenv"
 import bcrypt from "bcrypt"
-import { JWT_SECRET } from "@repo/common/jwtSecret";
 import jwt from "jsonwebtoken"
-import { signinSchema, signupSchema } from "@repo/common2/zod"
-import { deflate } from "zlib";
-import { error } from "console";
+import { signupSchema,signinSchema } from "../lib/zod";
 
-console.log("env secret is:-", JWT_SECRET);
 
+
+
+dotenv.config();
+const JWT_SECRET = process.env.JWT_SECRET
 const userRouter: Router = Router();
+const prisma = new PrismaClient();
 
 
 
@@ -170,7 +172,6 @@ userRouter.post('/updateInfo', authmiddleware, async (req: Request, res: Respons
         if (!userData) {
             res.send({
                 err: "your userData is missing please login",
-                details: error
             });
             return
         }
