@@ -1,5 +1,5 @@
 
-import { Input,Button,YourName } from '../../components/index';
+import { YourName } from '../../components/index';
 
 export default function Authpage() {
     return (
