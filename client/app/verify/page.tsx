@@ -2,11 +2,10 @@
 import { YourName,YourEmail,YourPassword } from '../../components/index';
 import { useUserStore ,useCount} from '@/lib/stateStore/index';
 
+
 export default function Authpage() {
     const {count,updateCount} = useCount();
     const {userData,updateUserData} = useUserStore();
-
-
     return (
         <div className='w-full flexCenter h-screen px-12'>
             {count==1?<YourName />:null}
