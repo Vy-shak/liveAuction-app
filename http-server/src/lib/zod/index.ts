@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const signupSchema = z.object({
     email: z.string().email(),
-    name: z.string(),
+    fullname: z.string(),
     password: z.string()
 });
 

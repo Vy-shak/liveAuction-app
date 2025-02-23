@@ -2,24 +2,27 @@ import { Router } from "express";
 import { Request, Response } from "express";
 import { authmiddleware } from "../middleware/auth";
 import { PrismaClient } from '@prisma/client';
-import dotenv from "dotenv"
+import dotenv, { config } from "dotenv"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import { signupSchema,signinSchema } from "../lib/zod";
 
 
 
-
-dotenv.config();
+dotenv.config({path:'./src/.env',debug:true});
 const JWT_SECRET = process.env.JWT_SECRET
 const userRouter: Router = Router();
 const prisma = new PrismaClient();
 
 
+console.log(process.env.DEFAULT_AVATAR)
+
+
 
 userRouter.post('/signup', (req: Request, res: Response) => {
 
-    const { name, email, password } = req.body;
+    const { fullname, email, password, profileUrl } = req.body;
+
 
     const parsedData = signupSchema.safeParse(req.body);
 
@@ -51,8 +54,8 @@ userRouter.post('/signup', (req: Request, res: Response) => {
             const user = await prisma.user.create({
                 data: {
                     email: email,
-                    name: name,
-                    imgUrl: "https://ppppwffeiuaabvrukckb.supabase.co/storage/v1/object/public/appAvatars/Avatar2.svg",
+                    fullname: fullname,
+                    imgUrl:profileUrl||process.env.DEFAULT_AVATAR,
                     password: hashedPass
                 }
 

@@ -1,14 +1,14 @@
 import jwt from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
 import { Response, NextFunction, Request } from "express";
-import { JWT_SECRET } from "@repo/common/jwtSecret";
+import dotenv from "dotenv"
+dotenv.config()
 
 function authmiddleware(req: Request, res: Response, next: NextFunction) {
     const authtoken = req.headers["authtoken"];
     console.log('the token', authtoken)
     console.log(typeof authtoken)
-
-
+    const  JWT_SECRET = process.env.JWT_SECRET
     if (authtoken && typeof authtoken === 'string') {
 
         if (JWT_SECRET) {
