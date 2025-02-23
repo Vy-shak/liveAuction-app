@@ -1,5 +1,6 @@
 "use client"
 import { YourName,YourEmail,YourPassword,Yourprofile } from '../../components/index';
+import { Button } from '../../components/index';
 import { useUserStore ,useCount} from '@/lib/stateStore/index';
 
 
@@ -12,6 +13,7 @@ export default function Authpage() {
             {count==2?<YourEmail />:null}
             {count==3?<YourPassword />:null}
             {count==4?<Yourprofile />:null}
+            {count==4?<Button className='absolute bottom-8 right-8'>Launch app</Button>:null}
             <div className='w-1/2 z-50'>
                <div className='w-full px-6 bg-neutral-400'>
 
