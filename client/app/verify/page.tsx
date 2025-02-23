@@ -1,5 +1,5 @@
 "use client"
-import { YourName,YourEmail,YourPassword } from '../../components/index';
+import { YourName,YourEmail,YourPassword,Yourprofile } from '../../components/index';
 import { useUserStore ,useCount} from '@/lib/stateStore/index';
 
 
@@ -11,6 +11,7 @@ export default function Authpage() {
             {count==1?<YourName />:null}
             {count==2?<YourEmail />:null}
             {count==3?<YourPassword />:null}
+            {count==4?<Yourprofile />:null}
             <div className='w-1/2 z-50'>
                <div className='w-full px-6 bg-neutral-400'>
 

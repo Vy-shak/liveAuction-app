@@ -3,6 +3,9 @@ import { Input,Button } from '../index'
 import { useUserStore ,useCount} from '../../lib/stateStore/index';
 import { useRef } from 'react';
 import { motion } from "motion/react"
+import axios from 'axios';
+import dotenv from "dotenv";
+dotenv.config();
 
 
 function YourPassword() {
@@ -20,6 +23,7 @@ function YourPassword() {
             updateCount()
         }
     }
+
 
   return (
     <motion.div initial={{opacity:50,x:0}} animate={{ opacity: 1,x:30}} transition={{ duration: 1}} className='w-1/2 flex justify-start items-start flex-col gap-y-6'>
