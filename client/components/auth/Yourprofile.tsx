@@ -14,7 +14,7 @@ type Profile = {
 
 function Yourprofile() {
     const uploadImgref = useRef<HTMLInputElement>(null);
-    const { userData } = useUserStore();
+    const { userData,updateUserData } = useUserStore();
     const [Profile, setProfile] = useState<Profile>({ id: 'Avatar2.svg', url: "https://ppppwffeiuaabvrukckb.supabase.co/storage/v1/object/public/appAvatars/Avatar2.svg" })
 
     const selectImage = () => {
@@ -47,6 +47,7 @@ function Yourprofile() {
             return
         }
         setProfile({ id: profileName, url: profileUrl });
+        updateUserData({type:"profileUrl",val:profileUrl})
         //@ts-ignore
         uploadImgref.current.value = null;
     }
@@ -65,10 +66,6 @@ function Yourprofile() {
                 </div>
             </div>
             <div className='w-full bg-neutral-200 h-[1px]'></div>
-            <div className='flexCenter w-fit gap-y-1 flex-col'>
-                <span className='text-neutral-600 text-xs font-normal'>OR</span>
-                <span className='text-blue-600'>I will do it later</span>
-            </div>
         </motion.div>
   )
 }
