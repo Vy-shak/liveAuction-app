@@ -8,4 +8,6 @@ const userRouter_1 = require("./routes/userRouter");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use('/api/v1/user', userRouter_1.userRouter);
-app.listen(3000);
+app.listen(3000, () => {
+    console.log("server is listening on port 3002");
+});

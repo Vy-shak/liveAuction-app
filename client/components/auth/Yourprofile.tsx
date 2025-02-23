@@ -12,7 +12,7 @@ type Profile = {
 }
 
 
-function Yourprofile() {
+function YourProfile() {
     const uploadImgref = useRef<HTMLInputElement>(null);
     const { userData,updateUserData } = useUserStore();
     const [Profile, setProfile] = useState<Profile>({ id: 'Avatar2.svg', url: "https://ppppwffeiuaabvrukckb.supabase.co/storage/v1/object/public/appAvatars/Avatar2.svg" })
@@ -54,7 +54,7 @@ function Yourprofile() {
 
     return (
         <motion.div initial={{ opacity: 50, x: 0 }} animate={{ opacity: 1, x: 30 }} transition={{ duration: 1 }} className='w-1/2 flex justify-center items-center flex-col gap-y-6'>
-            <div className='flex justify-center items-center flex-col gap-y-6'>
+            <div className='flex justify-start items-center flex-col gap-y-6'>
                 <span className='font-extrabold text-2xl w-fit text-neutral-700'>Time to create Profile!</span>
                 <div className='w-full flex-col flexCenter gap-y-3'>
                     <div className='w-fit flexCenter flex-col uppercase font-medium gap-y-2'>
@@ -70,4 +70,4 @@ function Yourprofile() {
   )
 }
 
-export default Yourprofile
+export default YourProfile
