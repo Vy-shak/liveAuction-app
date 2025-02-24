@@ -7,6 +7,9 @@ import YourProfile from "./auth/Yourprofile"
 import Progressdiv from "./auth/Progressdiv"
 import Navbar from "./auth/Navbar"
 import Signinform from "./auth/Signinform"
+import Sidebar from "./dashboard/Sidebar"
+import NavbarD from "./dashboard/NavbarD"
+import Sidebarmenu from "./dashboard/Sidebarmenu"
 
 
-export {Button,Input,YourName, Signinform, Navbar,Progressdiv,YourEmail,YourPassword,YourProfile}
+export {Button,Input,YourName, Sidebarmenu,NavbarD, Sidebar, Signinform, Navbar,Progressdiv,YourEmail,YourPassword,YourProfile}
