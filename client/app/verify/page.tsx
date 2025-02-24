@@ -21,7 +21,7 @@ export default function Authpage() {
         }
         const {fullname, email, password, profileUrl} = userData;
         console.log(userData)
-        if (!fullname&&!email&&password) {
+        if (!fullname&&!email&&!password) {
             console.log("credential missing");
             return
         }

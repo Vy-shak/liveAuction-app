@@ -10,6 +10,7 @@ import Signinform from "./auth/Signinform"
 import Sidebar from "./dashboard/Sidebar"
 import NavbarD from "./dashboard/NavbarD"
 import Sidebarmenu from "./dashboard/Sidebarmenu"
+import AuctionName from "./sellAuction/AuctionName"
 
 
-export {Button,Input,YourName, Sidebarmenu,NavbarD, Sidebar, Signinform, Navbar,Progressdiv,YourEmail,YourPassword,YourProfile}
+export {Button,Input,YourName, AuctionName, Sidebarmenu,NavbarD, Sidebar, Signinform, Navbar,Progressdiv,YourEmail,YourPassword,YourProfile}
