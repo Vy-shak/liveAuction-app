@@ -4,8 +4,6 @@ import { useUserStore ,useCount} from '../../lib/stateStore/index';
 import { useRef } from 'react';
 import { motion } from "motion/react"
 import axios from 'axios';
-import dotenv from "dotenv";
-dotenv.config();
 
 
 function YourPassword() {
