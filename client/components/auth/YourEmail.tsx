@@ -24,7 +24,7 @@ function YourEmail() {
             <h4 className='font-extrabold text-2xl text-neutral-700' > <span>{`Hello ${userData.fullname}`}</span><br/><span>Welcome to Biddify</span></h4>
             <div className='w-full  gap-y-4 flex justify-start items-start flex-col'>
                 <span className='font-normal text-md text-neutral-700'>Please provide your email</span>
-                <Input  ref={emailRef} />
+                <Input type='email' placeholder='eg:Tylerdurdan@gmail.com'  ref={emailRef} />
                 <Button onClick={Uploademail} size={"default"} className='bg-primaryGreen-700 w-full text-white' >Next</Button>
             </div>
             </motion.div>

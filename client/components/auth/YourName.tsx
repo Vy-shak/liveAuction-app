@@ -23,7 +23,7 @@ function YourName() {
       <h4 className='font-extrabold text-2xl text-neutral-700' ><span>Join Biddify for a smooth and seamless </span>bidding experience!</h4>
       <div className='w-full  gap-y-4 flex justify-start items-start flex-col'>
         <span className='font-normal text-md text-neutral-700'>What we should call you</span>
-        <Input ref={fullNameref} />
+        <Input placeholder='Tyler durdan' ref={fullNameref} />
         <Button onClick={UploadName} size={"default"} className='bg-primaryGreen-700 w-full text-white' >Next</Button>
       </div>
     </motion.div>
