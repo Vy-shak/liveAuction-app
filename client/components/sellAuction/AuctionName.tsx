@@ -12,7 +12,7 @@ function AuctionName() {
         <span className='whitespace-nowrap text-2xl font-semibold text-neutral-800'>What are you planning to sell on auction?</span>
         <div className='w-fit h-fit flexCenter gap-x-4'>
             <Image className='w-20 rounded-lg cursor-pointer' alt='carIcon' src={CarIcon} />
-            <Image className='w-20 rounded-lg' alt='bikeIcon' src={BikeIcon} />
+            <Image className='w-20 rounded-lg cursor-pointer' alt='bikeIcon' src={BikeIcon} />
         </div>
         </div>
         <div className='flexCenter gap-y-6 flex-col w-full'>
