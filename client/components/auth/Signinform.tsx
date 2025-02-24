@@ -3,10 +3,12 @@ import React, { useRef } from 'react';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import axios from 'axios';
+import {useRouter} from 'next/navigation';
 
 function Signinform() {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
+    const Router = useRouter()
 
     async function handlelogin() {
         const password = passwordRef.current?.value;
@@ -19,7 +21,7 @@ function Signinform() {
                 return;
             }
             const signinData = await axios.post(
-                `${url}signin`,
+                `${url}/signin`,
                 { password, email },
                 {
                     headers: {
@@ -32,6 +34,7 @@ function Signinform() {
 
             if (signinData.data?.token) {
                 localStorage.setItem('token', signinData.data?.token);
+                Router.push('/dashboard')
             }
         } catch (error) {
             console.error(error);
