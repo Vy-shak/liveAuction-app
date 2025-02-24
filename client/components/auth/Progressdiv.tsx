@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import { useCount } from '@/lib/stateStore'
 import { useState } from 'react';
