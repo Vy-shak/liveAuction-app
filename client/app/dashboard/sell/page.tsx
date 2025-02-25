@@ -1,10 +1,14 @@
+"use client"
 import React from 'react'
-import { AuctionName } from '../../../components/index'
+import { AuctionName,Vehicledetails } from '../../../components/index'
+import useSellCount from '@/lib/stateStore/sellCount'
 
 function page() {
+  const {count,updateCount} = useSellCount()
   return (
     <section className='w-full flexCenter h-screen'>
-        <AuctionName />
+        {count==1&&<AuctionName />}
+        {count==2&&<Vehicledetails />}
     </section>
   )
 }

@@ -7,7 +7,8 @@ enum types {
 }
 
 type auctionData ={
-    // type:types
+    type:types
+    auctionName:string,
     brand:string,
     model:string,
     year:number,
@@ -18,7 +19,8 @@ type auctionData ={
 }
 
 const initialVal: auctionData = {
-    // type:types.car,
+    type:types.car,
+    auctionName:"",
     brand:"",
     model:"",
     year:0,
@@ -34,19 +36,19 @@ const initialVal: auctionData = {
   }
 
   interface Store {
-    userData: auctionData;
-    updateUserData: (data: SetterProp) => void;
+    auctionData: auctionData;
+    updateAuctiondata: (data: SetterProp) => void;
   }
 
   const useAuctiondata = create<Store>((set) => ({
-    userData: initialVal,
-    updateUserData: ({ type, val }) =>
+    auctionData: initialVal,
+    updateAuctiondata: ({ type, val }) =>
       set((state) => {
-        const updatedUser = {...state.userData};
+        const updatedUser = {...state.auctionData};
         (updatedUser[type] as any) = val
-        return { userData: updatedUser}
+        return { auctionData: updatedUser}
       }),
   }));
 
 
-export default auctionData
+export default useAuctiondata
