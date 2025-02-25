@@ -6,7 +6,7 @@ import useAuctiondata from '@/lib/stateStore/auctionDetails'
 import { useRef } from 'react'
 
 interface details {
-    brandName: string,
+    brand: string,
     model: string,
     year:number,
     kmCovered:number,
@@ -17,9 +17,10 @@ interface details {
 
 function Vehicledetails() {
     const {auctionData,updateAuctiondata} = useAuctiondata();
+    console.log(auctionData)
 
     const vehicleDetails = useRef<details>({
-        brandName: "",
+        brand: "",
         model: "",
         year:0,
         kmCovered:0,
@@ -28,10 +29,18 @@ function Vehicledetails() {
         ownership:0,
     });
 
+    const addvehicleData = ()=>{
+        const {brand,model,year,kmCovered,discription,mileage,ownership} = vehicleDetails.current;
+
+        for(const key in vehicleDetails.current) {
+            const value = vehicleDetails.current[key];
+            updateAuctiondata({type:key,val:value})
+        }
+    }
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         vehicleDetails.current[name] = value;
-        console.log(vehicleDetails.current)
     };
 
 
@@ -40,7 +49,7 @@ function Vehicledetails() {
             <div className='w-full flex gap-x-10 justify-between items-center'>
                 <div className='flex w-full justify-start gap-y-2    items-start flex-col'>
                     <label >Brand name</label>
-                    <Input onChange={handleInputChange} name='brandName' title='Brand name' placeholder='Yamaha' />
+                    <Input onChange={handleInputChange} name='brand' title='Brand name' placeholder='Yamaha' />
                 </div>
                 <div className='flex w-full justify-start gap-y-2 items-start flex-col'>
                     <label>Model</label>
@@ -65,8 +74,8 @@ function Vehicledetails() {
                     </div>
                     <div className='flex w-1/2 flex-col justify-between items-center h-full'>
                         <div className='flex w-full justify-start gap-y-2 items-start flex-col'>
-                            <label>Milage</label>
-                            <Input name='milage' onChange={handleInputChange} title='Km covered' placeholder='16000' />
+                            <label>Mileage</label>
+                            <Input name='mileage' onChange={handleInputChange} title='Km covered' placeholder='16000' />
                         </div>
                         <div className='flex w-full justify-start gap-y-2 items-start flex-col'>
                             <label>Ownership</label>
@@ -76,7 +85,7 @@ function Vehicledetails() {
                 </div>
             </div>
             <div className='w-full flexCenter px-20'>
-                <Button className='w-full'>Finish vehicle details</Button>
+                <Button onClick={addvehicleData} className='w-full'>Finish vehicle details</Button>
             </div>
         </section>
     )
