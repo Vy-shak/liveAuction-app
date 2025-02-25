@@ -14,9 +14,10 @@ type auctionData ={
     year:number,
     kmCovered:number,
     mileage:number,
-    owner:number,
+    ownership:number,
     discription:string
-}
+};
+
 
 const initialVal: auctionData = {
     type:types.car,
@@ -26,7 +27,7 @@ const initialVal: auctionData = {
     year:0,
     kmCovered:0,
     mileage:0,
-    owner:0,
+    ownership:0,
     discription:""
   };
 
