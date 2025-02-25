@@ -7,30 +7,30 @@ enum types {
 }
 
 type auctionData ={
-    type:types
+    // type:types
     brand:string,
     model:string,
-    // year:number,
-    // kmCovered:number,
-    // mileage:number,
-    // owner:number,
+    year:number,
+    kmCovered:number,
+    mileage:number,
+    owner:number,
     discription:string
 }
 
 const initialVal: auctionData = {
-    type:types.car,
+    // type:types.car,
     brand:"",
     model:"",
-    // year:0,
-    // kmCovered:0,
-    // mileage:0,
-    // owner:0,
+    year:0,
+    kmCovered:0,
+    mileage:0,
+    owner:0,
     discription:""
   };
 
   interface SetterProp {
-    type: keyof auctionData |types
-    val: string|types
+    type: keyof auctionData
+    val: auctionData[keyof auctionData]
   }
 
   interface Store {
@@ -43,7 +43,7 @@ const initialVal: auctionData = {
     updateUserData: ({ type, val }) =>
       set((state) => {
         const updatedUser = {...state.userData};
-        updatedUser[type] = val
+        (updatedUser[type] as any) = val
         return { userData: updatedUser}
       }),
   }));
