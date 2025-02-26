@@ -33,13 +33,16 @@ function Vehicledetails() {
         const {brand,model,year,kmCovered,discription,mileage,ownership} = vehicleDetails.current;
 
         for(const key in vehicleDetails.current) {
+                    //@ts-ignore
             const value = vehicleDetails.current[key];
+                    //@ts-ignore
             updateAuctiondata({type:key,val:value})
         }
     }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
+        //@ts-ignore
         vehicleDetails.current[name] = value;
     };
 
