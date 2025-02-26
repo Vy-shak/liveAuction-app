@@ -12,6 +12,7 @@ import NavbarD from "./dashboard/NavbarD"
 import Sidebarmenu from "./dashboard/Sidebarmenu"
 import AuctionName from "./sellAuction/AuctionName"
 import Vehicledetails from "./sellAuction/Vehicledetails"
+import VehicleImg from "./sellAuction/VehicleImg"
 
 
-export {Button,Input,YourName, Vehicledetails, AuctionName, Sidebarmenu,NavbarD, Sidebar, Signinform, Navbar,Progressdiv,YourEmail,YourPassword,YourProfile}
+export {Button,Input,YourName, VehicleImg, Vehicledetails, AuctionName, Sidebarmenu,NavbarD, Sidebar, Signinform, Navbar,Progressdiv,YourEmail,YourPassword,YourProfile}

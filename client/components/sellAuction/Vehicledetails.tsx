@@ -4,6 +4,7 @@ import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import useAuctiondata from '@/lib/stateStore/auctionDetails'
 import { useRef } from 'react'
+import useSellCount from '@/lib/stateStore/sellCount'
 
 interface details {
     brand: string,
@@ -17,6 +18,7 @@ interface details {
 
 function Vehicledetails() {
     const {auctionData,updateAuctiondata} = useAuctiondata();
+      const {count,updateCount} = useSellCount()
     console.log(auctionData)
 
     const vehicleDetails = useRef<details>({
@@ -37,7 +39,8 @@ function Vehicledetails() {
             const value = vehicleDetails.current[key];
                     //@ts-ignore
             updateAuctiondata({type:key,val:value})
-        }
+        };
+        updateCount()
     }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
