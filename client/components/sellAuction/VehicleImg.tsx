@@ -25,7 +25,7 @@ function VehicleImg() {
      const price = priceRef.current?.value;
      if (price) {
        updateAuctiondata({type:'price',val:price})
-     }
+     };
   }
 
   console.log(auctionData)
