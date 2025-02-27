@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { Button } from '../ui/button'
@@ -17,10 +18,17 @@ enum dateType {
 
 function VehicleImg() {
   const [photos,setphotos] = useState<any[]>([]);
-  const infoRef = useRef<HTMLInputElement>(null)
-  const {auctionData} = useAuctiondata();
+  const priceRef = useRef<HTMLInputElement>(null)
+  const {auctionData,updateAuctiondata} = useAuctiondata();
 
-  console.log(auctionData.startDate,auctionData.endDate)
+  const Register = ()=>{
+     const price = priceRef.current?.value;
+     if (price) {
+       updateAuctiondata({type:'price',val:price})
+     }
+  }
+
+  console.log(auctionData)
   const photosRef = useRef<HTMLInputElement>(null)
 
   const uploadPhotos = ()=>{
@@ -92,9 +100,9 @@ function VehicleImg() {
         <div className='w-full justify-start flex items-start flex-col gap-y-6'>
           <div className='flex justify-start flex-col items-start w-fit h-fit'>
             <span className='whitespace-nowrap'>Price</span>
-            <Input />
+            <Input ref={priceRef} type='number' />
           </div>
-          <Button>Register auction</Button>
+          <Button onClick={Register}>Register auction</Button>
         </div>
       </div>
     </section>
