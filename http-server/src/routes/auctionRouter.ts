@@ -13,7 +13,7 @@ const JWT_SECRET = process.env.JWT_SECRET
 
 
 auctionRouter.post("/createAuction",authmiddleware,async (req:Request,res:Response)=>{
-    const {auctionName,brand,discription,endDate,kmCovered,mileage,model,ownership,photos,startDate,type,year} = req.body;
+    const {auctionName,brand,discription, price,endDate,kmCovered,mileage,model,ownership,photos,startDate,type,year} = req.body;
     const userId = req.id;
 
     if (userId) {
@@ -23,7 +23,25 @@ auctionRouter.post("/createAuction",authmiddleware,async (req:Request,res:Respon
     };
 
     try {
-
+        prisma.auctions.create({
+            data:{
+                type:type,
+                auctionName:auctionName,
+                brand:brand,
+                discription:discription,
+                endDate:endDate,
+                startDate:startDate,
+                kmCovered:kmCovered,
+                mileage:mileage,
+                model:model,
+                ownership:ownership,
+                photos:photos,
+                year:year,
+                ownerId:userId,
+                registerdUsers:[],
+                price:price
+            }
+        })
     } catch (error) {
         
     }
