@@ -23,7 +23,7 @@ auctionRouter.post("/createAuction",authmiddleware,async (req:Request,res:Respon
     };
 
     try {
-        prisma.auctions.create({
+        const createAuction = await prisma.auctions.create({
             data:{
                 type:type,
                 auctionName:auctionName,
@@ -41,8 +41,17 @@ auctionRouter.post("/createAuction",authmiddleware,async (req:Request,res:Respon
                 registerdUsers:[],
                 price:price
             }
-        })
+        });
+
+        if (createAuction) {
+            res.status(200).send({
+                msg:'auction creation success'    
+            })
+        }
     } catch (error) {
-        
+        res.status(411).send({
+            err:"unable to create the room",
+            details:error
+        })
     }
 })
