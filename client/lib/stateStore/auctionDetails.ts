@@ -15,7 +15,11 @@ type auctionData ={
     kmCovered:number,
     mileage:number,
     ownership:number,
-    discription:string
+    discription:string,
+    photos:string[],
+    startDate:Date
+    endDate:Date,
+    price:number
 };
 
 
@@ -28,7 +32,11 @@ const initialVal: auctionData = {
     kmCovered:0,
     mileage:0,
     ownership:0,
-    discription:""
+    discription:"",
+    photos:[],
+    startDate:new Date(),
+    endDate:new Date(),
+    price:0
   };
 
   interface SetterProp {

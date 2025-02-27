@@ -19,14 +19,24 @@ model User {
   bio       String?
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-  myItems   Items[]
+  myItems   Auctions[]
 }
 
-model Items {
+model Auctions {
     id        Int        @id @default(autoincrement())
-    name      String     @unique
-    Discription String
-    OwnerId    Int
-    Owner   User   @relation(fields: [OwnerId],references: [id])
+    type      String  
+    ownerId   Int   
+    auctionName String
+    model       String
+    year        Int
+    kmCovered   Int
+    mileage     Int
+    ownership    Int
+    discription  String
+    photos      String[]
+    startDate   DateTime
+    endDate DateTime 
+    Owner   User   @relation(fields: [ownerId],references: [id])
     price   Int
+    registerdUsers String[]
 }

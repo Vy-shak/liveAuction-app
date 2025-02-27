@@ -40,7 +40,7 @@ function AuctionName() {
         <div className='flexCenter gap-y-6 flex-col w-full'>
         <div className='w-full flex justify-start items-start flex-col'>
             <span>Name your auction</span>
-            <Input ref={auctionNameref} />
+            <Input autoComplete="on" ref={auctionNameref} />
         </div>
         <Button onClick={addNameref} className='w-full'>Next</Button>
         </div>
