@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { AuctionName,Vehicledetails,VehicleImg } from '../../../components/index'
+import { AuctionName,Vehicledetails,VehicleImg } from '../../../../components/index'
 import useSellCount from '@/lib/stateStore/sellCount'
 
 function page() {
