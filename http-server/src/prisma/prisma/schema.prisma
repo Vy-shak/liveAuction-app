@@ -1,6 +1,7 @@
 
 
 
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -19,7 +20,8 @@ model User {
   bio       String?
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-  myItems   Auctions[]
+  myAuctions   Auctions[]
+  registedAuctions AuctionRegistration[]
 }
 
 model Auctions {
@@ -39,5 +41,12 @@ model Auctions {
     endDate DateTime 
     Owner   User   @relation(fields: [ownerId],references: [id])
     price   Int
-    registerdUsers String[]
+    registeredUser AuctionRegistration[]
+}
+model AuctionRegistration {
+  auction Auctions @relation(fields: [auctionId],references: [id])
+  auctionId Int
+  user   User   @relation(fields: [userId],references: [id])
+  userId  Int
+  @@id([auctionId,userId])
 }
