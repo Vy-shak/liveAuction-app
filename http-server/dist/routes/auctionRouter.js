@@ -162,16 +162,20 @@ auctionRouter.get("/getAll", auth_1.authmiddleware, (req, res) => __awaiter(void
 }));
 auctionRouter.get("/getCars", auth_1.authmiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.id;
-    if (userId) {
+    if (!userId) {
         res.status(411).send({
             msg: "unable to find your userId sorry"
         });
     }
     ;
     try {
+        const currentDate = new Date();
         const getCars = yield prisma.auctions.findMany({
             where: {
-                type: types.car
+                type: types.car,
+                endDate: {
+                    gte: currentDate
+                }
             }
         });
         if (getCars) {
@@ -189,16 +193,20 @@ auctionRouter.get("/getCars", auth_1.authmiddleware, (req, res) => __awaiter(voi
 }));
 auctionRouter.get("/getbikes", auth_1.authmiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.id;
-    if (userId) {
+    if (!userId) {
         res.status(411).send({
             msg: "unable to find your userId sorry"
         });
     }
     ;
     try {
+        const currentDate = new Date();
         const getBike = yield prisma.auctions.findMany({
             where: {
-                type: types.bike
+                type: types.bike,
+                endDate: {
+                    gte: currentDate
+                }
             }
         });
         if (getBike) {

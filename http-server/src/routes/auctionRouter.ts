@@ -156,16 +156,20 @@ auctionRouter.get("/getAll",authmiddleware,async (req:Request,res:Response)=>{
 
 auctionRouter.get("/getCars",authmiddleware,async (req:Request,res:Response)=>{
     const userId = req.id;
-    if (userId) {
+    if (!userId) {
         res.status(411).send({
             msg:"unable to find your userId sorry"
         })
     };
 
     try {
+        const currentDate = new Date();
         const getCars = await prisma.auctions.findMany({
             where:{
-                type:types.car
+                type:types.car,
+                endDate:{
+                    gte:currentDate
+                }
             }
         });
 
@@ -184,16 +188,20 @@ auctionRouter.get("/getCars",authmiddleware,async (req:Request,res:Response)=>{
 
 auctionRouter.get("/getbikes",authmiddleware,async (req:Request,res:Response)=>{
     const userId = req.id;
-    if (userId) {
+    if (!userId) {
         res.status(411).send({
             msg:"unable to find your userId sorry"
         })
     };
 
     try {
+        const currentDate = new Date();
         const getBike = await prisma.auctions.findMany({
             where:{
-                type:types.bike
+                type:types.bike,
+                endDate:{
+                    gte:currentDate
+                }
             }
         });
 
