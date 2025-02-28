@@ -72,11 +72,11 @@ auctionRouter.post("/createAuction", auth_1.authmiddleware, (req, res) => __awai
     }
 }));
 auctionRouter.post("/registerAuctions", auth_1.authmiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { auctionid } = req.body;
+    const { auctionId } = req.body;
     const userId = req.id;
     const checkAuction = yield prisma.auctions.findFirst({
         where: {
-            id: auctionid
+            id: auctionId
         }
     });
     if (!checkAuction) {
@@ -101,12 +101,12 @@ auctionRouter.post("/registerAuctions", auth_1.authmiddleware, (req, res) => __a
         const userExist = yield prisma.auctionRegistration.findFirst({
             where: {
                 userId: userId,
-                auctionId: auctionid
+                auctionId: auctionId
             }
         });
         if (userExist) {
             res.status(411).send({
-                msg: "user alreadu exist"
+                msg: "user already exist"
             });
             return;
         }
@@ -114,12 +114,17 @@ auctionRouter.post("/registerAuctions", auth_1.authmiddleware, (req, res) => __a
         const register = yield prisma.auctionRegistration.create({
             data: {
                 userId: userId,
-                auctionId: auctionid
+                auctionId: auctionId
             }
         });
         if (!register) {
             res.status(4111).send({
                 msg: "unable to register user"
+            });
+        }
+        else {
+            res.status(200).send({
+                msg: "user registered successfully",
             });
         }
     }

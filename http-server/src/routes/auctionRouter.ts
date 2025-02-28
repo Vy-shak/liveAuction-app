@@ -63,12 +63,12 @@ auctionRouter.post("/createAuction",authmiddleware,async (req:Request,res:Respon
 });
 
 auctionRouter.post("/registerAuctions",authmiddleware,async(req:Request,res:Response)=>{
-    const {auctionid} = req.body;
+    const {auctionId} = req.body;
     const userId = req.id;
 
     const checkAuction = await prisma.auctions.findFirst({
         where:{
-            id:auctionid
+            id:auctionId
         }
     });
 
@@ -93,26 +93,33 @@ auctionRouter.post("/registerAuctions",authmiddleware,async(req:Request,res:Resp
         const userExist = await prisma.auctionRegistration.findFirst({
             where:{
                 userId:userId,
-                auctionId:auctionid
+                auctionId:auctionId
             }
         });
 
 
         if(userExist) {
             res.status(411).send({
-                msg:"user alreadu exist"
+                msg:"user already exist"
             });
             return
         };
+
         const register = await prisma.auctionRegistration.create({
             data:{
                 userId:userId,
-                auctionId:auctionid
+                auctionId:auctionId
             }
         });
+
         if (!register) {
             res.status(4111).send({
                 msg:"unable to register user"
+            })
+        }
+        else {
+            res.status(200).send({
+                msg:"user registered successfully",
             })
         }
     } catch (error) {
