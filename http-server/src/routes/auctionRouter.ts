@@ -175,3 +175,50 @@ auctionRouter.get("/getbikes",authmiddleware,async (req:Request,res:Response)=>{
         })
     }
 });
+
+
+auctionRouter.get("/getRegistrations",authmiddleware,async (req:Request,res:Response)=>{
+    const userId = req.id;
+
+    try {
+        const registration = await prisma.auctionRegistration.findMany({
+            where:{
+                userId:userId
+            }
+        });
+
+        res.status(200).send({
+            msg:"registarions",
+            details:registration
+        })
+    } catch (error) {
+        res.status(411).send({
+            msg:"could not find your registrations",
+        });
+        return
+    }
+
+})
+
+auctionRouter.get("/getMyauctions",authmiddleware,async (req:Request,res:Response)=>{
+    const userId = req.id;
+
+    try {
+        const myAuctions = await prisma.auctions.findMany({
+            where:{
+                ownerId:userId
+            }
+        });
+
+        res.status(200).send({
+            msg:"your auctions",
+            details:myAuctions
+        })
+    } catch (error) {
+        res.status(411).send({
+            msg:"could not find your registrations",
+        });
+        return
+    }
+
+})
