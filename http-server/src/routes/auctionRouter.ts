@@ -121,6 +121,37 @@ auctionRouter.post("/registerAuctions",authmiddleware,async(req:Request,res:Resp
             details:error
         })
     }
+});
+
+auctionRouter.get("/getAll",authmiddleware,async (req:Request,res:Response)=>{
+    const userId = req.id;
+    if (!userId) {
+        res.status(411).send({
+            msg:"unable to find your userId sorry"
+        })
+    };
+
+    try {
+        const currentDate = new Date()
+        const getCars = await prisma.auctions.findMany({
+            where:{
+                endDate:{
+                    gte:currentDate
+                }
+            }
+        });
+
+        if (getCars) {
+            res.status(200).send({
+                msg:getCars
+            })
+        }
+    } catch (error) {
+        res.status(411).send({
+            err:"unable to get cars",
+            details:error
+        })
+    }
 })
 
 auctionRouter.get("/getCars",authmiddleware,async (req:Request,res:Response)=>{
