@@ -20,10 +20,11 @@ auctionRouter.post("/createAuction",authmiddleware,async (req:Request,res:Respon
     const {auctionName,brand,discription, price,endDate,kmCovered,mileage,model,ownership,photos,startDate,type,year} = req.body;
     const userId = req.id;
 
-    if (userId) {
+    if (!userId) {
         res.status(411).send({
-            msg:"unable to find your userId sorry"
-        })
+            msg:"unable to find your userId sorry",
+        });
+        return
     };
 
     try {
@@ -48,14 +49,16 @@ auctionRouter.post("/createAuction",authmiddleware,async (req:Request,res:Respon
 
         if (createAuction) {
             res.status(200).send({
-                msg:'auction creation success'    
-            })
+                msg:'auction creation success' 
+            });
+            return
         }
     } catch (error) {
         res.status(411).send({
             err:"unable to create the room",
             details:error
-        })
+        });
+        return
     }
 });
 
