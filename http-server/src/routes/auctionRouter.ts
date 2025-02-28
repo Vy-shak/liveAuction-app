@@ -221,4 +221,7 @@ auctionRouter.get("/getMyauctions",authmiddleware,async (req:Request,res:Respons
         return
     }
 
-})
+});
+
+
+export {auctionRouter}
