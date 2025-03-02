@@ -17,7 +17,7 @@ function Auctioncard({price,startDate,endDate,model, photo,brand,year,kmCovered}
   return (
       <div className='w-96 h-56 bg-white flex justify-start items-start flex-col' >
           <h3>Yamaha rx-100 fully custom made mysore</h3>
-          <Image alt='vehicle Img' src={photo} />
+          <Image width={800} height={500} alt='vehicle Img' src={photo} />
           <div className='w-full flex justify-normal items-center'>
           <div className='w-fit flex justify-between flex-col items-start'>
               <div className='w-fit h-fit flex flex-col justify-start items-start'>

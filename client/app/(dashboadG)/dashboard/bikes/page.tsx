@@ -4,9 +4,9 @@ import React from 'react'
 import {RenderAuctions} from '../../../../components/index';
 
 function page() {
-  return(
-    <RenderAuctions renderType='ALL'/>
-  )
+    return(
+        <RenderAuctions renderType={'BIKE'}/>
+    )
 }
 
 export default page
