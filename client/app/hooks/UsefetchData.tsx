@@ -6,8 +6,8 @@ import axios from 'axios'
 
 
 
-function UsefetchAuctions(category:string) {
-    const [Auctions,setAuctions] = useState<any[]|any>();
+function UsefetchUser(category:string) {
+    const [userdata,setUserdata] = useState<any>();
 
     useEffect(()=>{
         (async function fetchAuction() {
@@ -22,14 +22,11 @@ function UsefetchAuctions(category:string) {
                 "authToken":token
             }});
 
-            if (data) {
-                setAuctions(data.msg)
-            }
-
+            setUserdata(data)
         })()
     },[]);
 
-    return {Auctions,setAuctions}
+    return {userdata,setUserdata}
 }
 
-export {UsefetchAuctions}
+export {UsefetchUser}
