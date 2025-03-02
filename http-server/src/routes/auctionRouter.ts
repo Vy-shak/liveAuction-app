@@ -19,7 +19,23 @@ enum types {
 auctionRouter.post("/createAuction",authmiddleware,async (req:Request,res:Response)=>{
     const {auctionName,brand,discription, price,endDate,kmCovered,mileage,model,ownership,photos,startDate,type,year} = req.body;
     const userId = req.id;
-
+    
+    console.log(
+        `Auction Name: ${auctionName}, ` +
+        `Brand: ${brand}, ` +
+        `Description: ${discription}, ` +
+        `Price: $${price}, ` +
+        `End Date: ${endDate}, ` +
+        `KM Covered: ${kmCovered} km, ` +
+        `Mileage: ${mileage} km/l, ` +
+        `Model: ${model}, ` +
+        `Ownership: ${ownership}, ` +
+        `Photos: ${photos}, ` +
+        `Start Date: ${startDate}, ` +
+        `Type: ${type}, ` +
+        `Year: ${year}`
+      );
+    
     if (!userId) {
         res.status(411).send({
             msg:"unable to find your userId sorry",

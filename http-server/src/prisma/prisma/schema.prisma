@@ -31,10 +31,10 @@ model Auctions {
     ownerId   Int   
     auctionName String
     model       String
-    year        Int
-    kmCovered   Int
-    mileage     Int
-    ownership    Int
+    year        String
+    kmCovered   String
+    mileage     String
+    ownership    String
     discription  String
     photos      String[]
     startDate   DateTime
