@@ -1,14 +1,14 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { VehicleIcon } from '@/public'
 import { useRef } from 'react'
 import { supabase } from '@/lib/supabase/supabaseClient'
-import { Calendar } from '../ui/calendar'
 import useAuctiondata from '@/lib/stateStore/auctionDetails'
 import AnimatedDatePicker from './popCalender'
+import axios from 'axios'
 
 
 enum dateType {
@@ -21,11 +21,32 @@ function VehicleImg() {
   const priceRef = useRef<HTMLInputElement>(null)
   const {auctionData,updateAuctiondata} = useAuctiondata();
 
-  const Register = ()=>{
-     const price = priceRef.current?.value;
-     if (price) {
-       updateAuctiondata({type:'price',val:price})
-     };
+
+
+  useEffect(()=>{
+    updateAuctiondata({type:"photos",val:photos})
+  },[photos])
+
+
+  const Register = async () => {
+    const token = localStorage.getItem("token");
+    const price = priceRef.current?.value;
+    if (price) {
+      updateAuctiondata({ type: 'price', val: price })
+    };
+
+
+    const url = process.env.NEXT_PUBLIC_HTTP_URL;
+    if (!url) {
+      console.log("url not present");
+      return
+    }
+    if (auctionData.photos[0]) {
+      const {data} = await axios.post(`${url}auctions/createAuction`,{...auctionData},{headers:{
+        "Content-Type":"application/json",
+        "authToken":token}});
+      console.log(data)
+    }
   }
 
   console.log(auctionData)
@@ -64,12 +85,13 @@ function VehicleImg() {
     }
 
     const getUrl = await supabase.storage.from("vehicleImages").getPublicUrl(profileName);
+    console.log(getUrl)
     const profileUrl = getUrl.data.publicUrl;
     if (!profileUrl) {
       console.log('no url found')
       return
     }
-    setphotos((prev)=>[...prev,profileUrl])
+    setphotos((prev)=>[...prev,profileUrl]);
   }
   
 

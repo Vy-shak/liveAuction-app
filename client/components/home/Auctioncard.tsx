@@ -14,10 +14,11 @@ type auctionData = {
 };
 
 function Auctioncard({ price, startDate, endDate, model, photo, brand, year, kmCovered }: auctionData) {
+    console.log(photo)
     return (
         <div className='w-96 bg-white px-3 flex justify-start rounded-lg items-start flex-col' >
             <h3 className='text-lg font-bold'>Yamaha rx-100 fully custom made mysore</h3>
-            <Image width={200} height={500} alt='vehicle Img' src={photo} />
+            {photo&&<Image width={200} height={500} alt='vehicle Img' src={photo} />}
             <div className='w-full flex justify-normal items-center'>
                 <div className='w-fit flex justify-between flex-col items-start'>
                     <div className='w-fit h-fit flex flex-col justify-start items-start'>
