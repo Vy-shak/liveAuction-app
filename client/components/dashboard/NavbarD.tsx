@@ -3,7 +3,7 @@ import React from 'react'
 
 function NavbarD() {
   return (
-    <div className='w-full h-12 bg-white border-b-2 border-neutral-300'>
+    <div className='w-full h-12 absolute top-0 bg-white border-b-2 border-neutral-300'>
 
     </div>
   )

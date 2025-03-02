@@ -2,7 +2,7 @@ import { Sidebar,NavbarD } from "../../components/index";
  
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
+    <div className="flex h-screen bg-neutral-100 flex-col md:flex-row md:overflow-hidden">
       <div className="w-full flex-none md:w-64">
         {<Sidebar/>}
         {<NavbarD/>}
