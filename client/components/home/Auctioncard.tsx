@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { Button } from 'react-day-picker'
+import { Button } from '../ui/button';
 
 type auctionData ={
     brand:string,

@@ -25,7 +25,7 @@ export default function Authpage() {
             console.log("credential missing");
             return
         }
-        const {data} = await axios.post(`${url}/signup`,{fullname, email, password, profileUrl});
+        const {data} = await axios.post(`${url}user/signup`,{fullname, email, password, profileUrl});
         console.log(data)
     }
 

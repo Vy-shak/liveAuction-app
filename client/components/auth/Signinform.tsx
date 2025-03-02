@@ -21,7 +21,7 @@ function Signinform() {
                 return;
             }
             const signinData = await axios.post(
-                `${url}/signin`,
+                `${url}user/signin`,
                 { password, email },
                 {
                     headers: {
@@ -34,7 +34,7 @@ function Signinform() {
 
             if (signinData.data?.token) {
                 localStorage.setItem('token', signinData.data?.token);
-                Router.push('/dashboard')
+                Router.push('/dashboard/home')
             }
         } catch (error) {
             console.error(error);
