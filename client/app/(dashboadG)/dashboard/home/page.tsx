@@ -2,10 +2,13 @@
 
 import React from 'react'
 import {RenderAuctions} from '../../../../components/index';
+import { div } from 'motion/react-client';
 
 function page() {
   return(
-    <RenderAuctions renderType='ALL'/>
+  <section className='w-full pl-20 pt-24'>
+        <RenderAuctions renderType='ALL'/>
+  </section>
   )
 }
 
