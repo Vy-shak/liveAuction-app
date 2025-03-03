@@ -8,6 +8,7 @@ import { Button } from '../ui/button'
 import useAuctiondata from '@/lib/stateStore/auctionDetails';
 import useSellCount from '@/lib/stateStore/sellCount'
 import { vehicleSchema1 } from '@/lib/zod/zodSchema'
+import { toast } from 'sonner'
 
 enum types {
   bike = "BIKE",
@@ -19,20 +20,25 @@ function AuctionName() {
   const {updateCount} = useSellCount();
   const auctionNameref = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    const zodCheck = vehicleSchema1.safeParse(auctionData);
-    if (zodCheck.success) {
-        updateCount();
-    }
-    else{
-      console.log("inputError")
-    }
-}, [auctionData]);
 
 
 
   const addNameref = ()=>{
     const name = auctionNameref.current?.value;
+
+    const zodVal = {
+      type:auctionData.type,
+      auctionName:name
+    };
+
+    const zodCheck = vehicleSchema1.safeParse(auctionData);
+    if (zodCheck.success) {
+        updateCount();
+    }
+    else{
+      toast.warning("the length of your auction name is small")
+    }
+
     if (name) {
       updateAuctiondata({type:"auctionName",val:name});
     }

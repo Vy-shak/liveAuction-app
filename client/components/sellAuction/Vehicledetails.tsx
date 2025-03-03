@@ -38,16 +38,20 @@ function Vehicledetails() {
     const addvehicleData = ()=>{
         const {brand,model,year,kmCovered,discription,mileage,ownership} = vehicleDetails.current;
         const zodCheck = vehicleSchema2.safeParse(vehicleDetails.current);
+        const path = zodCheck.error?.issues[0].path[0];
         if (!zodCheck.success) {
-           toast.warning("your credential are not valid") 
-        }
-        console.log(zodCheck)
+           toast.warning(`There seems to be a problem with "${path}". Kindly review it.`);
+           return 
+        };
+
         for(const key in vehicleDetails.current) {
                     //@ts-ignore
             const value = vehicleDetails.current[key];
                     //@ts-ignore
             updateAuctiondata({type:key,val:value});
         };
+
+        updateCount()
     }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

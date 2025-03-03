@@ -11,6 +11,11 @@ body {
   justify-content: center;
   align-items: center;
 }
+.my-toast-container .toast {
+  background-color: red;
+  color: white;
+}
+
 
 @layer base {
   :root {
