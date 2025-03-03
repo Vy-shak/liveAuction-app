@@ -7,6 +7,7 @@ import { useRef } from 'react'
 import useSellCount from '@/lib/stateStore/sellCount'
 import { ChevronDown } from 'lucide-react'
 import { vehicleSchema2 } from '@/lib/zod/zodSchema'
+import { toast } from 'sonner'
 
 interface details {
     brand: string,
@@ -33,20 +34,14 @@ function Vehicledetails() {
         ownership:0,
     });
 
-    useEffect(() => {
-        const zodCheck = vehicleSchema2.safeParse(auctionData);
-        console.log(zodCheck)
-        if (zodCheck.success) {
-            updateCount();
-        }
-        else{
-          console.log("inputError")
-        }
-    }, [auctionData]);
 
     const addvehicleData = ()=>{
         const {brand,model,year,kmCovered,discription,mileage,ownership} = vehicleDetails.current;
-
+        const zodCheck = vehicleSchema2.safeParse(vehicleDetails.current);
+        if (!zodCheck.success) {
+           toast.warning("your credential are not valid") 
+        }
+        console.log(zodCheck)
         for(const key in vehicleDetails.current) {
                     //@ts-ignore
             const value = vehicleDetails.current[key];
@@ -59,7 +54,6 @@ function Vehicledetails() {
         const { name, value } = e.target;
         //@ts-ignore
         vehicleDetails.current[name] = value;
-        console.log(vehicleDetails)
     };
 
 
@@ -107,7 +101,7 @@ function Vehicledetails() {
                 </div>
             </div>
             <div className='w-full flexCenter px-20'>
-                <Button onClick={addvehicleData} className='w-full'>Finish vehicle details</Button>
+                <Button  onClick={addvehicleData} className='w-full'>Finish vehicle details</Button>
             </div>
         </section>
     )
