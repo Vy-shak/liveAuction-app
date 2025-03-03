@@ -5,6 +5,7 @@ import { Button } from '../ui/button'
 import useAuctiondata from '@/lib/stateStore/auctionDetails'
 import { useRef } from 'react'
 import useSellCount from '@/lib/stateStore/sellCount'
+import { ChevronDown } from 'lucide-react'
 
 interface details {
     brand: string,
@@ -65,11 +66,11 @@ function Vehicledetails() {
             <div className='w-full flex gap-x-10 justify-between items-center'>
                 <div className='flex w-full justify-start gap-y-2 items-start flex-col'>
                     <label>year</label>
-                    <Input name='year' onChange={handleInputChange} title='Year' placeholder='1947' />
+                    <Input name='year' className='w-40' type='number' onChange={handleInputChange} title='Year' placeholder='1947' />
                 </div>
                 <div className='flex w-full justify-start gap-y-2 items-start flex-col'>
                     <label>Km covered</label>
-                    <Input name='kmCovered'  onChange={handleInputChange} title='Km covered' placeholder='16000' />
+                    <Input name='kmCovered' className='w-40' type='number'  onChange={handleInputChange} title='Km covered' placeholder='16000' />
                 </div>
             </div>
             <div className='w-full flex justify-between items-start'>
@@ -81,11 +82,14 @@ function Vehicledetails() {
                     <div className='flex w-1/2 flex-col justify-between items-center h-full'>
                         <div className='flex w-full justify-start gap-y-2 items-start flex-col'>
                             <label>Mileage</label>
-                            <Input name='mileage' onChange={handleInputChange} title='Km covered' placeholder='16000' />
+                            <Input name='mileage' className='w-40' type='number' onChange={handleInputChange} title='Km covered' placeholder='16000' />
                         </div>
                         <div className='flex w-full justify-start gap-y-2 items-start flex-col'>
                             <label>Ownership</label>
-                            <Input name='ownership' onChange={handleInputChange} />
+                            <div className='w-fit flexCenter'>
+                            <Input className='w-40' type='number' onChange={handleInputChange} />
+                            <ChevronDown color='grey'/>
+                            </div>
                         </div>
                     </div>
                 </div>

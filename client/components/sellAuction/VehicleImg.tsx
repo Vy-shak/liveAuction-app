@@ -7,7 +7,6 @@ import { VehicleIcon } from '@/public'
 import { useRef } from 'react'
 import { supabase } from '@/lib/supabase/supabaseClient'
 import useAuctiondata from '@/lib/stateStore/auctionDetails'
-import AnimatedDatePicker from './popCalender'
 import axios from 'axios'
 
 
@@ -112,11 +111,11 @@ function VehicleImg() {
         <div className='w-full flex justify-start gap-x-6 items-center h-fit '>
           <div className='flex justify-start items-start flex-col w-fit h-fit'>
             <span className='whitespace-nowrap'>Start date</span>
-            <AnimatedDatePicker selectedDate={dateType.start} />
+
           </div>
           <div className='flex justify-start flex-col items-start w-fit h-fit'>
             <span className='whitespace-nowrap' >End date</span>
-            <AnimatedDatePicker selectedDate={dateType.end} />
+
           </div>
         </div>
         <div className='w-full justify-start flex items-start flex-col gap-y-6'>
