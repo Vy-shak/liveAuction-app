@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { CarIcon,BikeIcon } from '../../public/index'
 import { Input } from '../ui/input'
@@ -7,6 +7,7 @@ import { useRef } from 'react'
 import { Button } from '../ui/button'
 import useAuctiondata from '@/lib/stateStore/auctionDetails';
 import useSellCount from '@/lib/stateStore/sellCount'
+import { vehicleSchema1 } from '@/lib/zod/zodSchema'
 
 enum types {
   bike = "BIKE",
@@ -18,12 +19,22 @@ function AuctionName() {
   const {updateCount} = useSellCount();
   const auctionNameref = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    const zodCheck = vehicleSchema1.safeParse(auctionData);
+    if (zodCheck.success) {
+        updateCount();
+    }
+    else{
+      console.log("inputError")
+    }
+}, [auctionData]);
+
+
 
   const addNameref = ()=>{
     const name = auctionNameref.current?.value;
     if (name) {
       updateAuctiondata({type:"auctionName",val:name});
-      updateCount()
     }
   }
 

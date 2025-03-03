@@ -1,11 +1,12 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import useAuctiondata from '@/lib/stateStore/auctionDetails'
 import { useRef } from 'react'
 import useSellCount from '@/lib/stateStore/sellCount'
 import { ChevronDown } from 'lucide-react'
+import { vehicleSchema2 } from '@/lib/zod/zodSchema'
 
 interface details {
     brand: string,
@@ -32,6 +33,17 @@ function Vehicledetails() {
         ownership:0,
     });
 
+    useEffect(() => {
+        const zodCheck = vehicleSchema2.safeParse(auctionData);
+        console.log(zodCheck)
+        if (zodCheck.success) {
+            updateCount();
+        }
+        else{
+          console.log("inputError")
+        }
+    }, [auctionData]);
+
     const addvehicleData = ()=>{
         const {brand,model,year,kmCovered,discription,mileage,ownership} = vehicleDetails.current;
 
@@ -39,15 +51,15 @@ function Vehicledetails() {
                     //@ts-ignore
             const value = vehicleDetails.current[key];
                     //@ts-ignore
-            updateAuctiondata({type:key,val:value})
+            updateAuctiondata({type:key,val:value});
         };
-        updateCount()
     }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         //@ts-ignore
         vehicleDetails.current[name] = value;
+        console.log(vehicleDetails)
     };
 
 
@@ -87,7 +99,7 @@ function Vehicledetails() {
                         <div className='flex w-full justify-start gap-y-2 items-start flex-col'>
                             <label>Ownership</label>
                             <div className='w-fit flexCenter'>
-                            <Input className='w-40' type='number' onChange={handleInputChange} />
+                            <Input name='ownership' className='w-40' type='number' onChange={handleInputChange} />
                             <ChevronDown color='grey'/>
                             </div>
                         </div>
