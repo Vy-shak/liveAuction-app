@@ -99,9 +99,10 @@ function VehicleImg() {
       <div className='flex justify-start gap-y-6 w-full items-start flex-col'>
         <div className='w-full flex gap-y-6 flex-col justify-start items-start'>
           <div className='w-full flex gap-x-4 justify-start items-start'>
-            {photos.map((item,index)=>(
-              <Image key={index} width={50} height={50} className='w-20 h-20 rounded' alt='vehicleImg' src={item||VehicleIcon} />
-            ))}
+          <Image  width={50} height={50} className='w-20 h-20 rounded object-cover' alt='vehicleImg' src={photos[0]||VehicleIcon} />
+          <Image  width={50} height={50} className='w-20 h-20 rounded object-cover' alt='vehicleImg' src={photos[1]||VehicleIcon} />
+          <Image  width={50} height={50} className='w-20 h-20 rounded object-cover' alt='vehicleImg' src={photos[2]||VehicleIcon} />
+          <Image  width={50} height={50} className='w-20 h-20 rounded object-cover' alt='vehicleImg' src={photos[3]||VehicleIcon} />
           </div>
           <div className='w-fit h-fit'>
           <input multiple onChange={uploadImg} className='hidden' type='file' ref={photosRef}/>
@@ -111,7 +112,6 @@ function VehicleImg() {
         <div className='w-full flex justify-start gap-x-6 items-center h-fit '>
           <div className='flex justify-start items-start flex-col w-fit h-fit'>
             <span className='whitespace-nowrap'>Start date</span>
-
           </div>
           <div className='flex justify-start flex-col items-start w-fit h-fit'>
             <span className='whitespace-nowrap' >End date</span>
