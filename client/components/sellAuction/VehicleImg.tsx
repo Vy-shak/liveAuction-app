@@ -8,6 +8,7 @@ import { useRef } from 'react'
 import { supabase } from '@/lib/supabase/supabaseClient'
 import useAuctiondata from '@/lib/stateStore/auctionDetails'
 import axios from 'axios'
+import { vehicleSchema3 } from '@/lib/zod/zodSchema'
 
 
 enum dateType {

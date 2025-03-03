@@ -1,4 +1,4 @@
-import {z} from "zod"
+import {string, z} from "zod"
 
 enum types {
     bike = "BIKE",
@@ -22,6 +22,13 @@ const vehicleSchema2 = z.object({
     discription:z.string().min(5),
 });
 
+const vehicleSchema3 = z.object({
+    photos:z.array(z.string()),
+    startDate:z.string(),
+    endDate:z.string(),
+    price:z.coerce.number()
+})
 
 
-export{vehicleSchema1,vehicleSchema2}
+
+export{vehicleSchema1,vehicleSchema2,vehicleSchema3}
