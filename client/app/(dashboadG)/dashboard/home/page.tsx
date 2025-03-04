@@ -1,10 +1,12 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import {RenderAuctions} from '../../../../components/index';
-import { div } from 'motion/react-client';
+import { useAuctionlist } from '@/lib/stateStore/auctionsList';
 
 function page() {
+  const {auctionList} = useAuctionlist();
+
   return(
   <section className='w-full pl-20 pt-24'>
         <RenderAuctions renderType='ALL'/>

@@ -1,14 +1,20 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Auctioncard from '../home/Auctioncard';
 import { UsefetchAuctions } from '@/app/hooks/Usefetchauction';
+import { useAuctionlist } from '@/lib/stateStore/auctionsList';
 
 interface renderType {
     renderType: 'ALL' | 'CAR' | 'BIKE'
 }
 
 function RenderAuctions({ renderType }: renderType) {
+    const {updateAuctionList} = useAuctionlist()
     const { Auctions } = UsefetchAuctions("auctions/getAll");
+
+    useEffect(()=>{
+        updateAuctionList(Auctions)
+    },[Auctions])
     console.log("auction", Auctions)
     return (
         <section className='w-full h-full'>
