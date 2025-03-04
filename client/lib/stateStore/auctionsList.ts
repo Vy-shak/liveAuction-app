@@ -14,7 +14,7 @@ type AuctionData = {
     kmCovered: string;
     mileage: string;
     ownership: string;
-    description: string;
+    discription: string;
     photos: string[];
     startDate: string;
     endDate: string;
