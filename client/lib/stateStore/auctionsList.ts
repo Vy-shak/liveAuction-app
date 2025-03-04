@@ -16,9 +16,9 @@ type AuctionData = {
     ownership: string;
     description: string;
     photos: string[];
-    startDate: Date;
-    endDate: Date;
-    price: number;
+    startDate: string;
+    endDate: string;
+    price: string;
 };
 
 interface Store {

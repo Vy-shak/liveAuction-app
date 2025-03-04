@@ -8,6 +8,7 @@ import { useRef } from 'react'
 import { supabase } from '@/lib/supabase/supabaseClient'
 import useAuctiondata from '@/lib/stateStore/auctionDetails'
 import axios from 'axios'
+import { Datepicker } from './Datepicker'
 import { vehicleSchema3 } from '@/lib/zod/zodSchema'
 
 
@@ -31,6 +32,7 @@ function VehicleImg() {
   const Register = async () => {
     const token = localStorage.getItem("token");
     const price = priceRef.current?.value;
+
     if (price) {
       updateAuctiondata({ type: 'price', val: price })
     };
@@ -54,7 +56,6 @@ function VehicleImg() {
 
   const uploadPhotos = ()=>{
     photosRef.current?.click();
-    console.log('clicked');
   }
 
   const uploadImg = async () => {
@@ -113,10 +114,11 @@ function VehicleImg() {
         <div className='w-full flex justify-start gap-x-6 items-center h-fit '>
           <div className='flex justify-start items-start flex-col w-fit h-fit'>
             <span className='whitespace-nowrap'>Start date</span>
+            <Datepicker selectedDate={dateType.end}/>
           </div>
           <div className='flex justify-start flex-col items-start w-fit h-fit'>
             <span className='whitespace-nowrap' >End date</span>
-
+            <Datepicker selectedDate={dateType.end}/>
           </div>
         </div>
         <div className='w-full justify-start flex items-start flex-col gap-y-6'>
@@ -124,7 +126,9 @@ function VehicleImg() {
             <span className='whitespace-nowrap'>Price</span>
             <Input ref={priceRef} type='number' />
           </div>
+          <div>
           <Button onClick={Register}>Register auction</Button>
+          </div>
         </div>
       </div>
     </section>

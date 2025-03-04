@@ -11,11 +11,11 @@ body {
   justify-content: center;
   align-items: center;
 }
-.my-toast-container .toast {
-  background-color: red;
-  color: white;
+.flexStart {
+  display: flex;
+  justify-content: start;
+  align-items: start;
 }
-
 
 @layer base {
   :root {
