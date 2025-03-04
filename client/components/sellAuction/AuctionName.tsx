@@ -30,8 +30,9 @@ function AuctionName() {
       type:auctionData.type,
       auctionName:name
     };
+    console.log(zodVal)
 
-    const zodCheck = vehicleSchema1.safeParse(auctionData);
+    const zodCheck = vehicleSchema1.safeParse(zodVal);
     if (zodCheck.success) {
         updateCount();
     }

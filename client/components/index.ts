@@ -16,6 +16,7 @@ import VehicleImg from "./sellAuction/VehicleImg"
 import Auctioncard from "./home/Auctioncard"
 import { RenderAuctions } from "./dashboard/RenderAuctions"
 import Userprofile from "./dashboard/Userprofile"
+import { Textarea } from "./ui/textarea"
 
 
-export {Button,Input,YourName,Userprofile, Auctioncard, RenderAuctions, VehicleImg, Vehicledetails, AuctionName, Sidebarmenu,NavbarD, Sidebar, Signinform, Navbar,Progressdiv,YourEmail,YourPassword,YourProfile}
+export {Button,Input,YourName,Userprofile, Textarea, Auctioncard, RenderAuctions, VehicleImg, Vehicledetails, AuctionName, Sidebarmenu,NavbarD, Sidebar, Signinform, Navbar,Progressdiv,YourEmail,YourPassword,YourProfile}

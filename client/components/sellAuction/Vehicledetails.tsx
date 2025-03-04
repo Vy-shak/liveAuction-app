@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect } from 'react'
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
+import { Input,Button,Textarea } from '../index'
 import useAuctiondata from '@/lib/stateStore/auctionDetails'
 import { useRef } from 'react'
 import useSellCount from '@/lib/stateStore/sellCount'
@@ -40,7 +39,7 @@ function Vehicledetails() {
         const zodCheck = vehicleSchema2.safeParse(vehicleDetails.current);
         const path = zodCheck.error?.issues[0].path[0];
         if (!zodCheck.success) {
-           toast.warning(`There seems to be a problem with "${path}". Kindly review it.`);
+           toast.warning(`There seems to be a problem with ${path}. Kindly review it.`);
            return 
         };
 
@@ -87,7 +86,7 @@ function Vehicledetails() {
                 <div className='w-full flex justify-between h-full items-start gap-x-10 '>
                     <div className='flex  w-1/2 justify-start gap-y-2 items-start flex-col'>
                         <label>Discription</label>
-                        <Input name='discription' onChange={handleInputChange} className='h-40 flex justify-start items-start' title='Discription' placeholder='1947' />
+                        <Input name='discription' onChange={handleInputChange} className='h-40 text-left' title='Discription' placeholder='1947' />
                     </div>
                     <div className='flex w-1/2 flex-col justify-between items-center h-full'>
                         <div className='flex w-full justify-start gap-y-2 items-start flex-col'>
