@@ -1,7 +1,10 @@
+"use client"
 import React from 'react'
 import Image from 'next/image'
 import { Button } from '../ui/button';
 import { convertUtcToLocal } from '@/app/utils/timeConvert';
+import { UseSelectedAuction } from '@/lib/stateStore/auctionsList';
+import Link from 'next/link';
 
 type auctionData = {
     brand: string,
@@ -11,14 +14,22 @@ type auctionData = {
     photo: string,
     startDate: string
     endDate: string,
-    price: number
+    price: number,
+    selection: any
 };
 
-function Auctioncard({ price, startDate, endDate, model, photo, brand, year, kmCovered }: auctionData) {
+function Auctioncard({ price, selection, startDate, endDate, model, photo, brand, year, kmCovered }: auctionData) {
+    const { updateSelection } = UseSelectedAuction()
+    const handleSelection = () => {
+        updateSelection(selection)
+    }
+
     startDate = convertUtcToLocal(startDate);
     endDate = convertUtcToLocal(startDate);
+
     return (
-        <div className='w-96 bg-white pt-6 px-4 flex justify-start rounded-lg items-start flex-col' >
+        <Link href={"/dashboard/view"}>
+                <div onClick={handleSelection} className='w-96 bg-white pt-6 px-4 flex justify-start rounded-lg items-start flex-col' >
             <div className='w-full flex justify-start items-start gap-y-2 flex-col'>
                 <h3 className='text-lg font-bold'>Yamaha rx-100 fully custom made mysore</h3>
                 <div className='w-full overflow-hidden rounded-lg h-40 '>
@@ -45,6 +56,7 @@ function Auctioncard({ price, startDate, endDate, model, photo, brand, year, kmC
                 <Button>{price}</Button>
             </div>
         </div>
+        </Link>
     )
 }
 

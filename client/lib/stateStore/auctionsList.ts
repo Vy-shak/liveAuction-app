@@ -10,10 +10,10 @@ type AuctionData = {
     auctionName: string;
     brand: string;
     model: string;
-    year: number;
-    kmCovered: number;
-    mileage: number;
-    ownership: number;
+    year: string;
+    kmCovered: string;
+    mileage: string;
+    ownership: string;
     description: string;
     photos: string[];
     startDate: Date;
@@ -22,14 +22,14 @@ type AuctionData = {
 };
 
 interface Store {
-    auctionList: AuctionData[];
-    updateAuctionList: (data: AuctionData[]) => void; 
+    selectedAuction: AuctionData|null;
+    updateSelection: (data: AuctionData) => void; 
 }
 
-const useAuctionlist = create<Store>((set) => ({
-    auctionList: [],
-    updateAuctionList: (data) =>
-        set({ auctionList: data }), 
+const UseSelectedAuction = create<Store>((set) => ({
+    selectedAuction: null,
+    updateSelection: (data) =>
+        set({ selectedAuction: data }), 
 }));
 
-export {useAuctionlist}
+export {UseSelectedAuction}
