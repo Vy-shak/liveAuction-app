@@ -59,7 +59,7 @@ function Sidebar() {
 
 
   return (
-    <div onMouseLeave={()=>setCollapse(true)} onMouseEnter={()=>setCollapse(false)} className={`${collapse?"w-fit cursor-pointer transform duration-1000":"w-56 transform duration-1000"} ease-out pt-12 transform duration-1000  border-r-2 gap-y-3 border-neutral-200 absolute h-full top-0 left-0 bg-white flex justify-start items-start flex-col`}>
+    <div onMouseLeave={()=>setCollapse(true)} onMouseEnter={()=>setCollapse(false)} className={`${collapse?"w-fit cursor-pointer transform duration-1000":"w-56 transform duration-1000"} ease-out pt-12 transform duration-1000  border-r-2 gap-y-3 border-neutral-200 fixed h-full top-0 left-0 bg-white flex justify-start items-start flex-col`}>
       <div className='w-full cursor-pointer h-fit flex mt-10 justify-end items-center pr-6'>
         <ChevronFirst   className={`${collapse?"rotate-180 transform duration-500":"rotate-0 transform duration-500"}`} onClick={()=>setCollapse((prev)=>!prev)} />
       </div>

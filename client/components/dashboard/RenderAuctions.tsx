@@ -17,7 +17,7 @@ function RenderAuctions({ renderType }: renderType) {
     console.log("auction", Auctions)
     return (
         <section className='w-full h-full'>
-            <div className='w-full h-full flex text-black justify-start items-start gap-x-5'>
+            <div className='w-full h-full flex-wrap  flex text-black justify-start items-start gap-x-5'>
                 {Auctions && Auctions.map((item:any) => {
                     if (renderType === 'ALL') {
                         return(
