@@ -16,9 +16,10 @@ type auctionData = {
     endDate: string,
     price: number,
     selection: any
+    auctionName:string
 };
 
-function Auctioncard({ price, selection, startDate, endDate, model, photo, brand, year, kmCovered }: auctionData) {
+function Auctioncard({ price, auctionName, selection, startDate, endDate, model, photo, brand, year, kmCovered }: auctionData) {
     const { updateSelection } = UseSelectedAuction()
     const handleSelection = () => {
         updateSelection(selection)
@@ -31,7 +32,7 @@ function Auctioncard({ price, selection, startDate, endDate, model, photo, brand
         <Link href={"/dashboard/view"}>
                 <div onClick={handleSelection} className='w-96 bg-white pt-6 px-4 flex justify-start rounded-lg items-start flex-col' >
             <div className='w-full flex justify-start items-start gap-y-2 flex-col'>
-                <h3 className='text-lg font-bold'>Yamaha rx-100 fully custom made mysore</h3>
+                <h3 className='text-lg font-bold'>{auctionName}</h3>
                 <div className='w-full overflow-hidden rounded-lg h-40 '>
                     {photo && <Image className='w-full h-full object-cover' width={200} height={500} alt='vehicle Img' src={photo} />}
                 </div>

@@ -17,24 +17,15 @@ enum types {
 
 
 auctionRouter.post("/createAuction",authmiddleware,async (req:Request,res:Response)=>{
-    const {auctionName,brand,discription, price,endDate,kmCovered,mileage,model,ownership,photos,startDate,type,year} = req.body;
+    const {auctionName,brand,discription, price,kmCovered,mileage,model,ownership,photos,type,year} = req.body;
     const userId = req.id;
-    
-    console.log(
-        `Auction Name: ${auctionName}, ` +
-        `Brand: ${brand}, ` +
-        `Description: ${discription}, ` +
-        `Price: $${price}, ` +
-        `End Date: ${endDate}, ` +
-        `KM Covered: ${kmCovered} km, ` +
-        `Mileage: ${mileage} km/l, ` +
-        `Model: ${model}, ` +
-        `Ownership: ${ownership}, ` +
-        `Photos: ${photos}, ` +
-        `Start Date: ${startDate}, ` +
-        `Type: ${type}, ` +
-        `Year: ${year}`
-      );
+
+    req.body.startDate = new Date(req.body.startDate);
+    req.body.endDate = new Date(req.body.endDate);
+
+
+    console.log("the date",req.body.startDate);
+
     
     if (!userId) {
         res.status(411).send({
@@ -50,8 +41,8 @@ auctionRouter.post("/createAuction",authmiddleware,async (req:Request,res:Respon
                 auctionName:auctionName,
                 brand:brand,
                 discription:discription,
-                endDate:endDate,
-                startDate:startDate,
+                endDate:req.body.endDate ,
+                startDate:req.body.startDate,
                 kmCovered:kmCovered,
                 mileage:mileage,
                 model:model,

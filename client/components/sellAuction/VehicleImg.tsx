@@ -7,7 +7,7 @@ import { VehicleIcon } from '@/public'
 import { useRef } from 'react'
 import { supabase } from '@/lib/supabase/supabaseClient'
 import useAuctiondata from '@/lib/stateStore/auctionDetails'
-import axios from 'axios'
+import axios, { all } from 'axios'
 import { Datepicker } from './Datepicker'
 import { vehicleSchema3 } from '@/lib/zod/zodSchema'
 
@@ -19,39 +19,45 @@ enum dateType {
 
 function VehicleImg() {
   const [photos,setphotos] = useState<any[]>([]);
-  const priceRef = useRef<HTMLInputElement>(null)
+  const [allDone,setAlldone] = useState(false)
+  const priceRef = useRef<HTMLInputElement>(null);
   const {auctionData,updateAuctiondata} = useAuctiondata();
 
-
+  console.log("final",auctionData);
 
   useEffect(()=>{
     updateAuctiondata({type:"photos",val:photos})
-  },[photos])
+  },[photos]);
 
-
-  const Register = async () => {
-    const token = localStorage.getItem("token");
+  const finishRegistration = ()=>{
     const price = priceRef.current?.value;
-
+    console.log(price)
     if (price) {
       updateAuctiondata({ type: 'price', val: price })
     };
+    console.log(auctionData)
+    vehicleSchema3.safeParse({...auctionData,})
+  }
 
+  const Register = async () => {
+    const token = localStorage.getItem("token");
 
     const url = process.env.NEXT_PUBLIC_HTTP_URL;
     if (!url) {
       console.log("url not present");
       return
     }
-    if (auctionData.photos[0]) {
+    try {
       const {data} = await axios.post(`${url}auctions/createAuction`,{...auctionData},{headers:{
         "Content-Type":"application/json",
         "authToken":token}});
-      console.log(data)
+
+      
+    } catch (error) {
+      throw error
     }
   }
 
-  console.log(auctionData)
   const photosRef = useRef<HTMLInputElement>(null)
 
   const uploadPhotos = ()=>{
@@ -126,8 +132,9 @@ function VehicleImg() {
             <span className='whitespace-nowrap'>Price</span>
             <Input ref={priceRef} type='number' />
           </div>
-          <div>
-          <Button onClick={Register}>Register auction</Button>
+          <div className='flexCenter gap-x-6'>
+          <Button key={1} onClick={Register}>Register auction</Button>
+          <Button key={2} onClick={finishRegistration}>finish details</Button>
           </div>
         </div>
       </div>
