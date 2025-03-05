@@ -16,6 +16,7 @@ exports.auctionRouter = void 0;
 const express_1 = require("express");
 const auth_1 = require("../middleware/auth");
 const client_1 = require("@prisma/client");
+const zod_1 = require("../lib/zod");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config({ path: './src/.env', debug: true });
 const prisma = new client_1.PrismaClient();
@@ -30,8 +31,11 @@ var types;
 auctionRouter.post("/createAuction", auth_1.authmiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { auctionName, brand, discription, price, kmCovered, mileage, model, ownership, photos, type, year } = req.body;
     const userId = req.id;
+    const zodCheck = zod_1.auctionSchema.safeParse(Object.assign(Object.assign({}, req.body), { ownerId: userId }));
+    console.log(zodCheck);
     req.body.startDate = new Date(req.body.startDate);
     req.body.endDate = new Date(req.body.endDate);
+    console.log("datetype", req.body.startDate);
     console.log("the date", req.body.startDate);
     if (!userId) {
         res.status(411).send({

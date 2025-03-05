@@ -12,4 +12,21 @@ const signinSchema = z.object({
     password: z.string(),
 });
 
-export { signinSchema, signupSchema }
+const auctionSchema = z.object({
+    type: z.string(),
+    brand: z.string(),
+    ownerId: z.number(),
+    auctionName: z.string(),
+    model: z.string(),
+    year: z.string(),
+    kmCovered: z.string(),
+    mileage: z.string(),
+    ownership: z.string(),
+    discription: z.string(),
+    photos: z.array(z.string()),
+    startDate: z.string(),
+    endDate: z.string()
+})
+
+
+export { signinSchema, signupSchema,auctionSchema }

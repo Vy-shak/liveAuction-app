@@ -126,8 +126,6 @@ userRouter.post('/signin', (req: Request, res: Response) => {
         })
         return
     }
-
-
 });
 
 userRouter.get('/getData', authmiddleware, async (req: Request, res: Response) => {

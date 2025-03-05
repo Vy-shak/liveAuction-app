@@ -2,7 +2,9 @@ import { Router } from "express";
 import { Request, Response } from "express";
 import { authmiddleware } from "../middleware/auth";
 import { PrismaClient } from '@prisma/client';
+import { auctionSchema } from "../lib/zod";
 import dotenv, { config } from "dotenv"
+import { z } from "zod";
 
 dotenv.config({path:'./src/.env',debug:true});
 
@@ -20,9 +22,14 @@ auctionRouter.post("/createAuction",authmiddleware,async (req:Request,res:Respon
     const {auctionName,brand,discription, price,kmCovered,mileage,model,ownership,photos,type,year} = req.body;
     const userId = req.id;
 
+    const zodCheck = auctionSchema.safeParse({...req.body,ownerId:userId});
+
+    console.log(zodCheck)
+
     req.body.startDate = new Date(req.body.startDate);
     req.body.endDate = new Date(req.body.endDate);
 
+    console.log("datetype",req.body.startDate)
 
     console.log("the date",req.body.startDate);
 
