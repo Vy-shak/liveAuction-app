@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import Sidebarmenu from './Sidebarmenu'
 import { Home, TvMinimalPlay, CarFront, Bike, UserPlus  , BookKey ,Library } from 'lucide-react'
-import { ArrowLeftToLine } from "lucide-react"
+import { ChevronFirst  } from "lucide-react"
 
 const menuItems1 = [
   {
@@ -59,9 +59,9 @@ function Sidebar() {
 
 
   return (
-    <div className={`${collapse?"w-fit cursor-pointer transform duration-500":"w-56 transform duration-500"} ease-out pt-12 transform duration-500  border-r-2 gap-y-3 border-neutral-200 absolute h-full top-0 left-0 bg-white flex justify-start items-start flex-col`}>
+    <div onMouseLeave={()=>setCollapse(true)} onMouseEnter={()=>setCollapse(false)} className={`${collapse?"w-fit cursor-pointer transform duration-500":"w-56 transform duration-500"} ease-out pt-12 transform duration-500  border-r-2 gap-y-3 border-neutral-200 absolute h-full top-0 left-0 bg-white flex justify-start items-start flex-col`}>
       <div className='w-full cursor-pointer h-fit flex mt-10 justify-end items-center pr-6'>
-        <ArrowLeftToLine className={`${collapse?"rotate-180 transform duration-500":"rotate-0 transform duration-500"}`} onClick={()=>setCollapse((prev)=>!prev)} />
+        <ChevronFirst   className={`${collapse?"rotate-180 transform duration-500":"rotate-0 transform duration-500"}`} onClick={()=>setCollapse((prev)=>!prev)} />
       </div>
       <div className='flex justify-start px-4 gap-y-6 items-start flex-col w-full'>
         <div className='w-full pt-4  flex justify-start items-start flex-col gap-y-4'>
