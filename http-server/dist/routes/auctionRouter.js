@@ -29,13 +29,11 @@ var types;
     types["car"] = "CAR";
 })(types || (types = {}));
 auctionRouter.post("/createAuction", auth_1.authmiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { auctionName, brand, discription, price, kmCovered, mileage, model, ownership, photos, type, year } = req.body;
+    const { auctionName, brand, discription, startDate, endDate, price, kmCovered, mileage, model, ownership, photos, type, year } = req.body;
     const userId = req.id;
     const zodCheck = zod_1.auctionSchema.safeParse(Object.assign(Object.assign({}, req.body), { ownerId: userId }));
     console.log(zodCheck);
-    req.body.startDate = new Date(req.body.startDate);
-    req.body.endDate = new Date(req.body.endDate);
-    console.log("datetype", req.body.startDate);
+    console.log("datetype", typeof req.body.startDate);
     console.log("the date", req.body.startDate);
     if (!userId) {
         res.status(411).send({
@@ -51,8 +49,8 @@ auctionRouter.post("/createAuction", auth_1.authmiddleware, (req, res) => __awai
                 auctionName: auctionName,
                 brand: brand,
                 discription: discription,
-                endDate: req.body.endDate,
-                startDate: req.body.startDate,
+                endDate: endDate,
+                startDate: startDate,
                 kmCovered: kmCovered,
                 mileage: mileage,
                 model: model,

@@ -15,6 +15,7 @@ const signinSchema = zod_1.z.object({
 exports.signinSchema = signinSchema;
 const auctionSchema = zod_1.z.object({
     type: zod_1.z.string(),
+    price: zod_1.z.string(),
     brand: zod_1.z.string(),
     ownerId: zod_1.z.number(),
     auctionName: zod_1.z.string(),

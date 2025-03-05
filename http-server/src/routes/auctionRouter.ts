@@ -19,19 +19,20 @@ enum types {
 
 
 auctionRouter.post("/createAuction",authmiddleware,async (req:Request,res:Response)=>{
-    const {auctionName,brand,discription, price,kmCovered,mileage,model,ownership,photos,type,year} = req.body;
+    const {auctionName,brand,discription, startDate, endDate, price,kmCovered,mileage,model,ownership,photos,type,year} = req.body;
     const userId = req.id;
-
+    
     const zodCheck = auctionSchema.safeParse({...req.body,ownerId:userId});
 
-    console.log(zodCheck)
+    if (!zodCheck.success) {
+        res.status(411).send({
+            msg:"Input validation error",
+            details:zodCheck.error
+        });
 
-    req.body.startDate = new Date(req.body.startDate);
-    req.body.endDate = new Date(req.body.endDate);
+        return
+    }
 
-    console.log("datetype",req.body.startDate)
-
-    console.log("the date",req.body.startDate);
 
     
     if (!userId) {
@@ -48,8 +49,8 @@ auctionRouter.post("/createAuction",authmiddleware,async (req:Request,res:Respon
                 auctionName:auctionName,
                 brand:brand,
                 discription:discription,
-                endDate:req.body.endDate ,
-                startDate:req.body.startDate,
+                endDate:endDate ,
+                startDate:startDate,
                 kmCovered:kmCovered,
                 mileage:mileage,
                 model:model,

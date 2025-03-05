@@ -14,6 +14,7 @@ const signinSchema = z.object({
 
 const auctionSchema = z.object({
     type: z.string(),
+    price:z.string(),
     brand: z.string(),
     ownerId: z.number(),
     auctionName: z.string(),
