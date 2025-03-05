@@ -1,3 +1,4 @@
+import { min } from "date-fns";
 import {string, z} from "zod"
 
 enum types {
@@ -23,10 +24,10 @@ const vehicleSchema2 = z.object({
 });
 
 const vehicleSchema3 = z.object({
-    photos:z.array(z.string()),
-    startDate:z.string(),
-    endDate:z.string(),
-    price:z.coerce.number()
+    photos:z.array(z.string()).min(1),
+    startDate:z.coerce.date(),
+    endDate:z.coerce.date(),
+    price:z.coerce.number().min(1)
 })
 
 

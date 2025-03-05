@@ -32,9 +32,13 @@ auctionRouter.post("/createAuction", auth_1.authmiddleware, (req, res) => __awai
     const { auctionName, brand, discription, startDate, endDate, price, kmCovered, mileage, model, ownership, photos, type, year } = req.body;
     const userId = req.id;
     const zodCheck = zod_1.auctionSchema.safeParse(Object.assign(Object.assign({}, req.body), { ownerId: userId }));
-    console.log(zodCheck);
-    console.log("datetype", typeof req.body.startDate);
-    console.log("the date", req.body.startDate);
+    if (!zodCheck.success) {
+        res.status(411).send({
+            msg: "Input validation error",
+            details: zodCheck.error
+        });
+        return;
+    }
     if (!userId) {
         res.status(411).send({
             msg: "unable to find your userId sorry",
