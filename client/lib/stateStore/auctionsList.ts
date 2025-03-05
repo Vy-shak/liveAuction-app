@@ -6,6 +6,7 @@ enum types {
 }
 
 type AuctionData = {
+    id:number
     type: types;
     auctionName: string;
     brand: string;
