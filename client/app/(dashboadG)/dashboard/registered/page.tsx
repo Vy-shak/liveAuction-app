@@ -3,7 +3,13 @@ import React from 'react'
 import { useEffect,useState } from 'react'
 import axios from 'axios'
 import { RegisteredCard } from '@/components/register/RegisteredCard';
+import { auctionData } from '@/app/Types/auctionsType';
 
+interface auction{
+  auction:auctionData,
+  auctionId:number,
+  userId:number
+}
 
 function page() {
   const [Auctions,setAuctions] = useState<any[]|any>();
@@ -34,8 +40,8 @@ function page() {
   return (
     <section className='w-full flexStart pl-24 pt-20 flex-col'>
       <div className='w-full flexStart gap-y-4 flex-col'>
-      {Auctions&&Auctions.map(({auction})=>(
-        <RegisteredCard key={auction.id} endDate={auction.endDate} startDate={auction.startDate} model={auction.model} brand={auction.brand} imgUrl={auction.photos[0]}/>
+      {Auctions&&Auctions.map(({auction}:auction)=>(
+        <RegisteredCard key={auction.id} endDate={auction.endDate.toString()} startDate={auction.startDate.toString()} model={auction.model} brand={auction.brand} imgUrl={auction.photos[0]}/>
       ))}
       </div>
     </section>
