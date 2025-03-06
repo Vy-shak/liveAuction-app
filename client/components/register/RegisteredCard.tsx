@@ -1,6 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 import { convertUtcToLocal } from '@/app/utils/timeConvert'
+import { auctionData } from '@/app/Types/auctionsType'
+import { UseSelectedAuction } from '@/lib/stateStore/auctionsList'
 
 interface register {
   imgUrl: string,
@@ -8,11 +10,17 @@ interface register {
   model: string,
   endDate: string,
   startDate: string
+  item:auctionData
 }
 
-function RegisteredCard({ imgUrl, brand, model, endDate, startDate }: register) {
+function RegisteredCard({ imgUrl, brand, item, model, endDate, startDate }: register) {
+  const {updateSelection} = UseSelectedAuction()
   endDate = convertUtcToLocal(endDate);
-  startDate = convertUtcToLocal(startDate)
+  startDate = convertUtcToLocal(startDate);
+
+  const viewAuction = ()=>{
+    up
+  }
   return (
     <div className='w-full flexCenter rounded-md bg-white px-8 py-4'>
       <div className='w-full flexStart flex-col'>
