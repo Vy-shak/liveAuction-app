@@ -41,7 +41,7 @@ function page() {
     <section className='w-full flexStart pl-24 pt-20 flex-col'>
       <div className='w-full flexStart gap-y-4 flex-col'>
       {Auctions&&Auctions.map(({auction}:auction)=>(
-        <RegisteredCard key={auction.id} endDate={auction.endDate.toString()} startDate={auction.startDate.toString()} model={auction.model} brand={auction.brand} imgUrl={auction.photos[0]}/>
+        <RegisteredCard item={auction} key={auction.id} endDate={auction.endDate.toString()} startDate={auction.startDate.toString()} model={auction.model} brand={auction.brand} imgUrl={auction.photos[0]}/>
       ))}
       </div>
     </section>

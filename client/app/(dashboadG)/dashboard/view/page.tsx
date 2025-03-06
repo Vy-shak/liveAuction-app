@@ -6,21 +6,13 @@ import { OverviewCard } from '../../../../components/viewAuction/OverviewCard'
 import { Discriptioncard } from '../../../../components/viewAuction/Discriptioncard'
 import { UseSelectedAuction } from '@/lib/stateStore/auctionsList'
 import { Ownercard } from '../../../../components/viewAuction/Ownercard'
-import { useRouter } from 'next/navigation'
 import { Button } from '../../../../components/index'
 import axios from 'axios'
-import { url } from 'inspector'
 
 function page() {
   const { selectedAuction } = UseSelectedAuction();
   console.log("selectedAuction", selectedAuction);
-  const Router = useRouter();
 
-  useEffect(() => {
-    if (!selectedAuction) {
-      Router.push("/dashboard/home")
-    }
-  }, [selectedAuction]);
 
   const handleRegister = async () => {
     const token = localStorage.getItem("token");
