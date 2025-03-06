@@ -30,7 +30,7 @@ function Auctioncard({ price, auctionName, selection, startDate, endDate, model,
 
     return (
         <Link href={"/dashboard/view"}>
-                <div onClick={handleSelection} className='w-96 bg-white pt-6 px-4 flex justify-start rounded-lg items-start flex-col' >
+                <div onClick={handleSelection} className='w-full bg-white pt-6 px-4 flex justify-start rounded-lg items-start flex-col' >
             <div className='w-full flex justify-start items-start gap-y-2 flex-col'>
                 <h3 className='text-lg font-bold'>{auctionName}</h3>
                 <div className='w-full overflow-hidden rounded-lg h-40 '>
