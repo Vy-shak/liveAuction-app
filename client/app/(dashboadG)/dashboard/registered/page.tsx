@@ -2,6 +2,9 @@
 import React from 'react'
 import { useEffect,useState } from 'react'
 import axios from 'axios'
+import { RegisteredCard } from '@/components/register/RegisteredCard';
+
+
 function page() {
   const [Auctions,setAuctions] = useState<any[]|any>();
   
@@ -21,7 +24,7 @@ function page() {
       });
 
       if (data) {
-        setAuctions(data)
+        setAuctions(data.details)
       }
 
     })()
@@ -29,7 +32,12 @@ function page() {
   
   console.log("regiAuction",Auctions)
   return (
-    <section className='w-full flexStart flex-col'>
+    <section className='w-full flexStart pl-24 pt-20 flex-col'>
+      <div className='w-full flexStart gap-y-4 flex-col'>
+      {Auctions&&Auctions.map(({auction})=>(
+        <RegisteredCard key={auction.id} endDate={auction.endDate} startDate={auction.startDate} model={auction.model} brand={auction.brand} imgUrl={auction.photos[0]}/>
+      ))}
+      </div>
     </section>
   )
 }

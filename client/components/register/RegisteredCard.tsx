@@ -13,7 +13,7 @@ function RegisteredCard({ imgUrl, brand, model, endDate, startDate }: register) 
   return (
     <div className='w-full flexCenter bg-white'>
       <div className='w-full flexStart flex-col'>
-        <Image alt='vehicle image' src={imgUrl} />
+        <Image width={100} height={50} alt='vehicle image' src={imgUrl} />
         <div className='w-full h-fit flexStart flex-col'>
           <span>{brand}</span>
           <span>{model}</span>

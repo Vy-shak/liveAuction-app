@@ -242,6 +242,9 @@ auctionRouter.get("/getRegistrations", auth_1.authmiddleware, (req, res) => __aw
         const registration = yield prisma.auctionRegistration.findMany({
             where: {
                 userId: userId
+            },
+            include: {
+                auction: true
             }
         });
         res.status(200).send({

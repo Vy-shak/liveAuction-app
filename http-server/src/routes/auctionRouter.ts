@@ -248,13 +248,17 @@ auctionRouter.get("/getRegistrations",authmiddleware,async (req:Request,res:Resp
         const registration = await prisma.auctionRegistration.findMany({
             where:{
                 userId:userId
+            },
+            include:{
+                auction:true
             }
         });
 
         res.status(200).send({
             msg:"registarions",
             details:registration
-        })
+        });
+
     } catch (error) {
         res.status(411).send({
             msg:"could not find your registrations",
