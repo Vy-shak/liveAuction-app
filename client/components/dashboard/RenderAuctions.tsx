@@ -18,7 +18,7 @@ function RenderAuctions({ renderType }: renderType) {
     return (
         <section className='w-full h-full'>
             <div className='w-full h-full flex-wrap  flex text-black justify-start items-start gap-x-5'>
-                {Auctions && Auctions.map((item:any) => {
+                {Auctions && Auctions.msg.map((item:any) => {
                     if (renderType === 'ALL') {
                         return(
                             <Auctioncard auctionName={item.auctionName} selection = {item}  key={item.id} year={item.year} endDate={item.endDate} startDate={item.startDate

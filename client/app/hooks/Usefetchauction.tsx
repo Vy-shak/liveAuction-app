@@ -23,7 +23,7 @@ function UsefetchAuctions(category:string) {
             }});
 
             if (data) {
-                setAuctions(data.msg)
+                setAuctions(data)
             }
 
         })()
