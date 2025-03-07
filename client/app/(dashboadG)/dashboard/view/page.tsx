@@ -89,8 +89,8 @@ function page() {
         {selectedAuction && <Infocard year={selectedAuction.year} model={selectedAuction.model} kmCovered={selectedAuction.kmCovered} auctionName={selectedAuction.auctionName} brand={selectedAuction.brand} />}
         {selectedAuction && <Pricecard price={selectedAuction.price} />}
       </div>
-      <div className='w-full flexStart gap-x-6'>
-        <div className='w-full flexStart flex-col gap-y-6'>
+      <div className='w-full h-full  flexStart items-stretch gap-x-6'>
+        <div className='w-full flex justify-start  flex-col gap-y-6'>
           {selectedAuction && <OverviewCard endDate={selectedAuction.endDate} startDate={selectedAuction.startDate} />}
           {selectedAuction && <Discriptioncard discription={selectedAuction.discription} />}
         </div>

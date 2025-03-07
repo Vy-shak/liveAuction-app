@@ -7,7 +7,7 @@ import axios from 'axios'
 
 
 function UsefetchAuctions(category:string) {
-    const [Auctions,setAuctions] = useState<any[]|any>();
+    const [Auctions,setAuctions] = useState<any[]|any>(null);
 
     useEffect(()=>{
         (async function fetchAuction() {

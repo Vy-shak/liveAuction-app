@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react'
 import {RenderAuctions} from '../../../../components/index';
+import Loadingbox from '@/components/Loader/LoadingBox';
 
 function page() {
   return(

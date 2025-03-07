@@ -7,7 +7,7 @@ import axios from 'axios'
 
 
 function UsefetchUser(category:string) {
-    const [userdata,setUserdata] = useState<any>();
+    const [userdata,setUserdata] = useState<any>(null);
 
     useEffect(()=>{
         (async function fetchAuction() {

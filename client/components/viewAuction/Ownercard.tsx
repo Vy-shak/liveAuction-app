@@ -7,13 +7,15 @@ function Ownercard() {
       const {userdata} = UsefetchUser("user/getData");
   console.log("the userdate",userdata)
   return (
-    <div className='w-full bg-white rounded px-5 h-full flex-1 min-w-40'>
-      <span>OWNER</span>
-      {/* <div className='w-full h-20 border-2 border-neutral-600 rounded'>
-        {userdata.imgUrl&&<Image width={50} height={50} alt='ownerProfile' src={userdata.imgUrl} />}
-        {userdata.fullname&&<span>{userdata.fullname}</span>}
-      </div> */}
+    <div className='w-full flex-1 bg-white rounded py-4  px-5 h-full flex-1 min-w-64 '>
+      <span className='text-neutral-600 font-semibold'>OWNER</span>
+      <div className='w-full gap-y-4 flexStart flex-col'>
+      <div className='w-full h-20 border-2 border-neutral-100 px-6 flex justify-start items-center gap-x-4 rounded'>
+        {userdata&&<Image width={50} height={50} alt='ownerProfile' src={userdata.imgUrl} />}
+        {userdata&&<span>{userdata.fullname}</span>}
+      </div>
       <Button>Chat</Button>
+      </div>
     </div>
   )
 }
