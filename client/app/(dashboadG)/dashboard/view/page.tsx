@@ -7,7 +7,9 @@ import { Discriptioncard } from '../../../../components/viewAuction/Discriptionc
 import { UseSelectedAuction } from '@/lib/stateStore/auctionsList'
 import { Ownercard } from '../../../../components/viewAuction/Ownercard'
 import { Button } from '../../../../components/index'
+import Image from 'next/image'
 import axios from 'axios'
+import { ChevronRightCircle ,ChevronLeftCircle } from 'lucide-react'
 
 function page() {
   const { selectedAuction } = UseSelectedAuction();
@@ -29,7 +31,7 @@ function page() {
 
     try {
 
-      const req = await axios.post(`${url}auctions/registerAuctions`, {auctionId:selectedAuction?.id}, {
+      const req = await axios.post(`${url}auctions/registerAuctions`, { auctionId: selectedAuction?.id }, {
         headers: {
           "Content-Type": "application/json",
           "authToken": token
@@ -39,13 +41,20 @@ function page() {
       console.log(req);
 
     } catch (error) {
-       throw error
+      throw error
     }
   }
 
-  console.log(selectedAuction?.discription)
+  console.log("hey",selectedAuction)
   return (
     <section className='w-full gap-y-6 flexCenter flex-col  pl-20 pr-4 pb-4  bg-neutral-200 pt-20'>
+      <div className='w-full gap-x-6 flexCenter h-fit'>
+        <ChevronLeftCircle/>
+        <div className='w-2/3 h-96  rounded-xl overflow-hidden'>
+        {selectedAuction&&<Image className='w-full h-full object-cover' width={200} height={100} alt='vehicleimage' src={selectedAuction?.photos[0]}/>}
+        </div>
+        <ChevronRightCircle/>
+      </div>
       <div className='w-full h-24 justify-between gap-x-6 items-center flex'>
         {selectedAuction && <Infocard year={selectedAuction.year} model={selectedAuction.model} kmCovered={selectedAuction.kmCovered} auctionName={selectedAuction.auctionName} brand={selectedAuction.brand} />}
         {selectedAuction && <Pricecard price={selectedAuction.price} />}
