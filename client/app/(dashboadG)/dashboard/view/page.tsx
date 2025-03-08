@@ -10,19 +10,25 @@ import { Button } from '../../../../components/index'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import axios from 'axios'
-import { ChevronRightCircle ,ChevronLeftCircle } from 'lucide-react'
+import { SuccessAnimation } from '@/components/Loader/SuccessAnimation'
 import CheveronBox from '@/components/icons/CheveronBox'
 
 function page() {
   const { selectedAuction } = UseSelectedAuction();
-  const [renderImg,setRenderImg] = useState(0)
+  const [renderImg,setRenderImg] = useState(0);
+  const [fetchDone,setFetchdone] = useState(false)
   console.log("selectedAuction", selectedAuction);
   const Router = useRouter()
+
+  useEffect(()=>{
+    if (!selectedAuction) {
+      Router.push("/dashboard/home")
+    }
+  },[])
 
   const handleRegister = async () => {
     const token = localStorage.getItem("token");
     const url = process.env.NEXT_PUBLIC_HTTP_URL;
-
 
     if (!token) {
       console.log("token is not defined")
@@ -32,12 +38,6 @@ function page() {
       console.log("url is not defined")
     };
 
-    useEffect(()=>{
-      if (!selectedAuction) {
-        Router.push("/dashboard/home")
-      }
-    },[])
-
     try {
 
       const req = await axios.post(`${url}auctions/registerAuctions`, { auctionId: selectedAuction?.id }, {
@@ -46,6 +46,13 @@ function page() {
           "authToken": token
         }
       });
+
+      if (req) {
+        setFetchdone(true);
+        setTimeout(()=>{
+          Router.push("/dashboard/registered")
+        },2000);
+      }
 
       console.log(req);
 
@@ -74,6 +81,7 @@ function page() {
   console.log("hey",selectedAuction)
   return (
     <section className='w-full gap-y-6 flexCenter flex-col  pl-20 pr-4 pb-4  bg-neutral-200 pt-20'>
+      {fetchDone&&<SuccessAnimation/>}
       <div className='w-full gap-x-6 flexCenter h-fit'>
         <div onClick={prevImg} className='w-fit h-fit'>
         <CheveronBox type='left'/>

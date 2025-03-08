@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Button } from '../ui/button'
+import { useRouter } from 'next/navigation'
 import { Input } from '../ui/input'
 import { VehicleIcon } from '@/public'
 import { useRef } from 'react'
@@ -11,6 +12,7 @@ import axios, { all } from 'axios'
 import { Datepicker } from './Datepicker'
 import { vehicleSchema3 } from '@/lib/zod/zodSchema'
 import { toast } from 'sonner'
+import { SuccessAnimation } from '../Loader/SuccessAnimation'
 
 
 enum dateType {
@@ -20,7 +22,9 @@ enum dateType {
 
 function VehicleImg() {
   const [photos, setphotos] = useState<any[]>([]);
-  const [allDone, setAlldone] = useState(false)
+  const Router = useRouter()
+  const [allDone, setAlldone] = useState(false);
+  const [fetchDone,setFetchdone] = useState(false)
   const priceRef = useRef<HTMLInputElement>(null);
   const { auctionData, updateAuctiondata } = useAuctiondata();
 
@@ -65,6 +69,14 @@ function VehicleImg() {
           "authToken": token
         }
       });
+
+      if (data) {
+        setFetchdone(true);
+        setTimeout(()=>{
+          Router.push("/dashboard/home")
+        },2000);
+      }
+
 
 
     } catch (error) {
@@ -118,6 +130,7 @@ function VehicleImg() {
 
   return (
     <section className='w-full px-28 flex flex-col justify-start items-start'>
+      {fetchDone&&<SuccessAnimation/>}
       <div className='flex justify-start gap-y-6 w-full items-start flex-col'>
         <div className='w-full flex gap-y-6 flex-col justify-start items-start'>
           <div className='w-full flex gap-x-4 justify-start items-start'>
