@@ -16,24 +16,31 @@ wss.on('connection', async function connection(socket,req) {
   let auctioncode = urlParams.get('auctionCode');
   const auctionId = Number(auctioncode);
   if (!token) {
-     return
+    const errMsg = {type:'error',err:"the jwt token not present"}
+    socket.send(JSON.stringify(errMsg));
+    return
   }
-  if (auctioncode) {
-     return
+  if (!auctioncode) {
+    const errMsg = {type:'error',err:"the auction Code is not presnt"}
+    socket.send(JSON.stringify(errMsg))
+    return
   }
-
   const userId = await authCheck(token);
+  console.log(userId)
 
   const fullAuctionDetails = await auctionManager.checkValidation(auctionId, userId,socket);
 
   console.log(fullAuctionDetails)
 
   if (!userId) {
+    const errMsg = {type:'error',err:"can not get the userId"}
+    socket.send(JSON.stringify(errMsg))
     return
   }
 
   socket.on('message', function message(data) {
     console.log('received: %s', data);
+    socket.send(JSON.stringify(data))
   });
 
   socket.send('something');
