@@ -49,10 +49,15 @@ wss.on('connection', async function connection(socket,req) {
   const {fullname,profileUrl,price} = fullAuctionDetails
   
 
-  auctionManager.addAuction({userId,socket,fullname,auctionId,profileUrl,price})
+  auctionManager.addAuction({userId,socket,fullname,auctionId,profileUrl,price});
+
 
   socket.on('message', function message(data) {
-    socket.send(JSON.stringify(data))
+    const Message = JSON.parse(data as unknown as string);
+    if (Message.type == "price") {
+      const {price,socket,profileUrl,  userId,auctionId,fullname} = Message
+       auctionManager.updatePrice({price,userId,socket,profileUrl,auctionId,fullname})
+    } 
   });
 
   socket.send('server connected');

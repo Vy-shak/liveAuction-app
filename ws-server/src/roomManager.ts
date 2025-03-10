@@ -74,7 +74,31 @@ export class roomManager {
     }
 
     updatePrice ({price,userId,socket,profileUrl,auctionId,fullname}:updatePrice){
-        const existingAuction = this.auctionStore.get(auctionId);
+        const existingPrices = this.auctionStore.get(auctionId)?.price;
+        const existingMembers = this.auctionStore.get(auctionId)?.members;
+        const n = existingPrices?.length;
+        if (!n) {
+            return
+        }
+
+        if (n&&n<1) {
+            return
+        }
+
+        if(existingPrices&&price<=existingPrices[n-1].price) {
+            return
+        }
+
+        if (!existingMembers) {
+            return
+        }
+
+        const newPrice = [...existingPrices,{price:price,userId:userId}];
+        this.auctionStore.set(auctionId,{members:existingMembers,price:newPrice});
+
+        const updatedPrice = this.auctionStore.get(auctionId)?.price[n-1];
+
+        socket.send(JSON.stringify(updatedPrice))
     }
 }
 

@@ -42,7 +42,6 @@ class roomManager {
     }
     ;
     addAuction({ userId, socket, fullname, profileUrl, auctionId, price }) {
-        var _a, _b;
         const priceInt = Number(price);
         if (!this.auctionStore.has(auctionId)) {
             const creator = [{ userId, socket, fullname, profileUrl }];
@@ -59,9 +58,31 @@ class roomManager {
             this.auctionStore.set(auctionId, { members: updatedMembers, price: existingAuction.price });
         }
         ;
-        console.log(this.auctionStore);
-        console.log((_a = this.auctionStore.get(auctionId)) === null || _a === void 0 ? void 0 : _a.members);
-        console.log((_b = this.auctionStore.get(auctionId)) === null || _b === void 0 ? void 0 : _b.price);
+        // console.log(this.auctionStore)
+        // console.log(this.auctionStore.get(auctionId)?.members)
+        // console.log(this.auctionStore.get(auctionId)?.price)
+    }
+    updatePrice({ price, userId, socket, profileUrl, auctionId, fullname }) {
+        var _a, _b, _c;
+        const existingPrices = (_a = this.auctionStore.get(auctionId)) === null || _a === void 0 ? void 0 : _a.price;
+        const existingMembers = (_b = this.auctionStore.get(auctionId)) === null || _b === void 0 ? void 0 : _b.members;
+        const n = existingPrices === null || existingPrices === void 0 ? void 0 : existingPrices.length;
+        if (!n) {
+            return;
+        }
+        if (n && n < 1) {
+            return;
+        }
+        if (existingPrices && price <= existingPrices[n - 1].price) {
+            return;
+        }
+        if (!existingMembers) {
+            return;
+        }
+        const newPrice = [...existingPrices, { price: price, userId: userId }];
+        this.auctionStore.set(auctionId, { members: existingMembers, price: newPrice });
+        const updatedPrice = (_c = this.auctionStore.get(auctionId)) === null || _c === void 0 ? void 0 : _c.price[n - 1];
+        socket.send(JSON.stringify(updatedPrice));
     }
 }
 exports.roomManager = roomManager;
