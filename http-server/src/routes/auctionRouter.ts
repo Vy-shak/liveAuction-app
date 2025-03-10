@@ -4,7 +4,6 @@ import { authmiddleware } from "../middleware/auth";
 import { PrismaClient } from '@prisma/client';
 import { auctionSchema } from "../lib/zod";
 import dotenv, { config } from "dotenv"
-import { z } from "zod";
 
 dotenv.config({path:'./src/.env',debug:true});
 

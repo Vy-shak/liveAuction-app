@@ -58,7 +58,10 @@ export class roomManager {
             };
             const updatedMembers = [...existingAuction?.members,newMember];
             this.auctionStore.set(auctionId,{members:updatedMembers,price:existingAuction.price})
-        }
+        };
+        console.log(this.auctionStore)
+        console.log(this.auctionStore.get(auctionId)?.members)
+        console.log(this.auctionStore.get(auctionId)?.price)
     }
 }
 

@@ -4,7 +4,7 @@ import { authCheck } from './authCheck';
 
 const wss = new WebSocketServer({ port: 8080 });
 
-const auctionManager = new roomManager()
+const auctionManager = new roomManager();
 
 wss.on('connection', async function connection(socket,req) {
   socket.on('error', console.error);
@@ -52,9 +52,8 @@ wss.on('connection', async function connection(socket,req) {
   auctionManager.addAuction({userId,socket,fullname,auctionId,profileUrl,price})
 
   socket.on('message', function message(data) {
-    console.log('received: %s', data);
     socket.send(JSON.stringify(data))
   });
 
-  socket.send('something');
+  socket.send('server connected');
 })
