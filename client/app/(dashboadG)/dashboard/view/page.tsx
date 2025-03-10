@@ -12,19 +12,49 @@ import Image from 'next/image'
 import axios from 'axios'
 import { SuccessAnimation } from '@/components/Loader/SuccessAnimation'
 import CheveronBox from '@/components/icons/CheveronBox'
+import { getTimeLeft } from '@/app/utils/getTimeleft'
+import Link from 'next/link'
+import { get } from 'http'
 
 function page() {
   const { selectedAuction } = UseSelectedAuction();
+  const [registered,setRegistered] = useState(false);
   const [renderImg,setRenderImg] = useState(0);
-  const [fetchDone,setFetchdone] = useState(false)
-  console.log("selectedAuction", selectedAuction);
+  const [fetchDone,setFetchdone] = useState(false);
   const Router = useRouter()
 
   useEffect(()=>{
     if (!selectedAuction) {
       Router.push("/dashboard/home")
-    }
-  },[])
+    };
+    const checkRegistration = async ()=>{
+      const token = localStorage.getItem("token");
+      const url = process.env.NEXT_PUBLIC_HTTP_URL;
+      try {
+        const check = await axios.post(`${url}auctions/checkRegistration`,{auctionId:selectedAuction?.id},{
+          headers: {
+            "Content-Type": "application/json",
+            "authToken": token
+          }
+        });
+
+        if (check.data.details) {
+          const currentDate = new Date();
+          const startDate = check.data.details.auction.startDate;
+          if (currentDate<startDate) {
+             const timeRemains = getTimeLeft(startDate,currentDate);
+             console.log("time",timeRemains)
+          }
+
+           setRegistered((prev)=>true)
+        }
+      } catch (error) {
+        
+      }
+    };
+    checkRegistration();
+
+  },[]);
 
   const handleRegister = async () => {
     const token = localStorage.getItem("token");
@@ -104,7 +134,10 @@ function page() {
         </div>
         <Ownercard />
       </div>
-      <Button onClick={handleRegister} className='w-full'>Register</Button>
+      {!registered&&<Button onClick={handleRegister} className='w-full'>Register</Button>}
+      {registered&&<Link className='w-full' href={"/dashboard/live"}>
+      <Button className='w-full'>View auction</Button>
+      </Link>}
     </section>
   )
 }

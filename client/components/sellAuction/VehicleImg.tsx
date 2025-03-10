@@ -147,7 +147,7 @@ function VehicleImg() {
         <div className='w-full flex justify-start gap-x-6 items-center h-fit '>
           <div className='flex justify-start items-start flex-col w-fit h-fit'>
             <span className='whitespace-nowrap'>Start date</span>
-            <Datepicker selectedDate={dateType.end} />
+            <Datepicker selectedDate={dateType.start} />
           </div>
           <div className='flex justify-start flex-col items-start w-fit h-fit'>
             <span className='whitespace-nowrap' >End date</span>

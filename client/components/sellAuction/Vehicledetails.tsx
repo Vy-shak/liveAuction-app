@@ -20,7 +20,7 @@ interface details {
 
 function Vehicledetails() {
     const {auctionData,updateAuctiondata} = useAuctiondata();
-      const {count,updateCount} = useSellCount()
+    const {count,updateCount} = useSellCount()
     console.log(auctionData)
 
     const vehicleDetails = useRef<details>({

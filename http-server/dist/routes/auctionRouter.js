@@ -30,6 +30,7 @@ var types;
 })(types || (types = {}));
 auctionRouter.post("/createAuction", auth_1.authmiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { auctionName, brand, discription, startDate, endDate, price, kmCovered, mileage, model, ownership, photos, type, year } = req.body;
+    console.log(startDate, endDate);
     const userId = req.id;
     const zodCheck = zod_1.auctionSchema.safeParse(Object.assign(Object.assign({}, req.body), { ownerId: userId }));
     if (!zodCheck.success) {
@@ -265,6 +266,31 @@ auctionRouter.get("/getMyauctions", auth_1.authmiddleware, (req, res) => __await
         const myAuctions = yield prisma.auctions.findMany({
             where: {
                 ownerId: userId
+            }
+        });
+        res.status(200).send({
+            msg: "your auctions",
+            details: myAuctions
+        });
+    }
+    catch (error) {
+        res.status(411).send({
+            msg: "could not find your registrations",
+        });
+        return;
+    }
+}));
+auctionRouter.post("/checkRegistration", auth_1.authmiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.id;
+    const { auctionId } = req.body;
+    try {
+        const myAuctions = yield prisma.auctionRegistration.findFirst({
+            where: {
+                userId: userId,
+                auctionId: auctionId
+            },
+            include: {
+                auction: true
             }
         });
         res.status(200).send({

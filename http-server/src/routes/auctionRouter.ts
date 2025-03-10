@@ -19,6 +19,7 @@ enum types {
 
 auctionRouter.post("/createAuction",authmiddleware,async (req:Request,res:Response)=>{
     const {auctionName,brand,discription, startDate, endDate, price,kmCovered,mileage,model,ownership,photos,type,year} = req.body;
+    console.log(startDate,endDate)
     const userId = req.id;
     
     const zodCheck = auctionSchema.safeParse({...req.body,ownerId:userId});
@@ -281,6 +282,34 @@ auctionRouter.get("/getMyauctions",authmiddleware,async (req:Request,res:Respons
             msg:"your auctions",
             details:myAuctions
         })
+    } catch (error) {
+        res.status(411).send({
+            msg:"could not find your registrations",
+        });
+        return
+    }
+
+});
+
+auctionRouter.post("/checkRegistration",authmiddleware,async (req:Request,res:Response)=>{
+    const userId = req.id;
+    const {auctionId} = req.body
+    try {
+        const myAuctions = await prisma.auctionRegistration.findFirst({
+            where:{
+                userId:userId,
+                auctionId:auctionId
+            },
+            include:{
+                auction:true
+            }
+        });
+
+        res.status(200).send({
+            msg:"your auctions",
+            details:myAuctions
+        });
+
     } catch (error) {
         res.status(411).send({
             msg:"could not find your registrations",
