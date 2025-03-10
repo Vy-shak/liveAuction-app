@@ -78,14 +78,20 @@ export class roomManager {
         const existingMembers = this.auctionStore.get(auctionId)?.members;
         const n = existingPrices?.length;
         if (!n) {
+            let errMsg={type:"error",err:"internal error on price"};
+            socket.send(JSON.stringify(errMsg));
             return
         }
 
         if (n&&n<1) {
+            let errMsg={type:"error",err:"internal error on price2"};
+            socket.send(JSON.stringify(errMsg));
             return
         }
 
         if(existingPrices&&price<=existingPrices[n-1].price) {
+            let errMsg={type:"error",err:"the bidding price is smaller than the current one"};
+            socket.send(JSON.stringify(errMsg));
             return
         }
 
@@ -96,8 +102,8 @@ export class roomManager {
         const newPrice = [...existingPrices,{price:price,userId:userId}];
         this.auctionStore.set(auctionId,{members:existingMembers,price:newPrice});
 
-        const updatedPrice = this.auctionStore.get(auctionId)?.price[n-1];
-
+        const updatedPrice = this.auctionStore.get(auctionId)?.price[n];
+        console.log(this.auctionStore.get(auctionId)?.price)
         socket.send(JSON.stringify(updatedPrice))
     }
 }

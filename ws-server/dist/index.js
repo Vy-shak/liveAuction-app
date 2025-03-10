@@ -56,8 +56,8 @@ wss.on('connection', function connection(socket, req) {
         socket.on('message', function message(data) {
             const Message = JSON.parse(data);
             if (Message.type == "price") {
-                const { price, userId, socket, profileUrl, auctionId, fullname } = Message;
-                auctionManager.updatePrice({ price, userId, socket, profileUrl, auctionId, fullname });
+                const { price, profileUrl, userId, auctionId, fullname } = Message;
+                auctionManager.updatePrice({ price, socket, userId, profileUrl, auctionId, fullname });
             }
         });
         socket.send('server connected');

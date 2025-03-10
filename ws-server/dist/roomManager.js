@@ -63,17 +63,23 @@ class roomManager {
         // console.log(this.auctionStore.get(auctionId)?.price)
     }
     updatePrice({ price, userId, socket, profileUrl, auctionId, fullname }) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         const existingPrices = (_a = this.auctionStore.get(auctionId)) === null || _a === void 0 ? void 0 : _a.price;
         const existingMembers = (_b = this.auctionStore.get(auctionId)) === null || _b === void 0 ? void 0 : _b.members;
         const n = existingPrices === null || existingPrices === void 0 ? void 0 : existingPrices.length;
         if (!n) {
+            let errMsg = { type: "error", err: "internal error on price" };
+            socket.send(JSON.stringify(errMsg));
             return;
         }
         if (n && n < 1) {
+            let errMsg = { type: "error", err: "internal error on price2" };
+            socket.send(JSON.stringify(errMsg));
             return;
         }
         if (existingPrices && price <= existingPrices[n - 1].price) {
+            let errMsg = { type: "error", err: "the bidding price is smaller than the current one" };
+            socket.send(JSON.stringify(errMsg));
             return;
         }
         if (!existingMembers) {
@@ -81,7 +87,8 @@ class roomManager {
         }
         const newPrice = [...existingPrices, { price: price, userId: userId }];
         this.auctionStore.set(auctionId, { members: existingMembers, price: newPrice });
-        const updatedPrice = (_c = this.auctionStore.get(auctionId)) === null || _c === void 0 ? void 0 : _c.price[n - 1];
+        const updatedPrice = (_c = this.auctionStore.get(auctionId)) === null || _c === void 0 ? void 0 : _c.price[n];
+        console.log((_d = this.auctionStore.get(auctionId)) === null || _d === void 0 ? void 0 : _d.price);
         socket.send(JSON.stringify(updatedPrice));
     }
 }
