@@ -11,6 +11,15 @@ interface addAuction {
     price: string
 }
 
+interface updatePrice {
+    userId:number,
+    socket:WebSocket,
+    price:number,
+    fullname:string,
+    profileUrl:string,
+    auctionId:number
+}
+
 export class roomManager {
     private auctionStore: Map<number,auctions>;
     private prisma = new PrismaClient();
@@ -59,9 +68,13 @@ export class roomManager {
             const updatedMembers = [...existingAuction?.members,newMember];
             this.auctionStore.set(auctionId,{members:updatedMembers,price:existingAuction.price})
         };
-        console.log(this.auctionStore)
-        console.log(this.auctionStore.get(auctionId)?.members)
-        console.log(this.auctionStore.get(auctionId)?.price)
+        // console.log(this.auctionStore)
+        // console.log(this.auctionStore.get(auctionId)?.members)
+        // console.log(this.auctionStore.get(auctionId)?.price)
+    }
+
+    updatePrice ({price,userId,socket,profileUrl,auctionId,fullname}:updatePrice){
+        const existingAuction = this.auctionStore.get(auctionId);
     }
 }
 
