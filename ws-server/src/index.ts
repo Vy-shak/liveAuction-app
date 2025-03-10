@@ -55,8 +55,8 @@ wss.on('connection', async function connection(socket,req) {
   socket.on('message', function message(data) {
     const Message = JSON.parse(data as unknown as string);
     if (Message.type == "price") {
-      const {price,socket,profileUrl,  userId,auctionId,fullname} = Message
-       auctionManager.updatePrice({price,userId,socket,profileUrl,auctionId,fullname})
+      const {price,socket,profileUrl, userToken,auctionId,fullname} = Message
+       auctionManager.updatePrice({price,socket, userId, profileUrl,auctionId,fullname})
     } 
   });
 
