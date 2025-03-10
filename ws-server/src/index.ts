@@ -26,17 +26,30 @@ wss.on('connection', async function connection(socket,req) {
     return
   }
   const userId = await authCheck(token);
-  console.log(userId)
 
-  const fullAuctionDetails = await auctionManager.checkValidation(auctionId, userId,socket);
 
-  console.log(fullAuctionDetails)
 
   if (!userId) {
     const errMsg = {type:'error',err:"can not get the userId"}
     socket.send(JSON.stringify(errMsg))
     return
   }
+
+  const fullAuctionDetails = await auctionManager.checkValidation(auctionId, userId,socket);
+  if (!fullAuctionDetails) {
+    const errMsg = {type:'error',err:"can not get fullAuctiondetails"}
+    socket.send(JSON.stringify(errMsg))
+    return
+  }
+  if (fullAuctionDetails.auctionId!==auctionId&&fullAuctionDetails.userId!==userId) {
+    const errMsg = {type:'error',err:"mismatch in the credentials"}
+    socket.send(JSON.stringify(errMsg))
+    return
+  }
+  const {fullname,profileUrl,price} = fullAuctionDetails
+  
+
+  auctionManager.addAuction({userId,socket,fullname,auctionId,profileUrl,price})
 
   socket.on('message', function message(data) {
     console.log('received: %s', data);

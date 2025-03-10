@@ -1,13 +1,13 @@
 import { WebSocket } from "ws"
 interface Priceupdation {
     userId:number,
-    roomId:number,
+    auctionId:number,
     price:number,
 }
 
 interface memberData {
     userId:number,
-    fullName:string,
+    fullname:string,
     profileUrl:string,
     socket:WebSocket,
 }

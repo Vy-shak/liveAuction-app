@@ -2,9 +2,13 @@ import { auctions,memberData,priceData } from "./ts-types";
 import WebSocket from "ws";
 import { PrismaClient } from "@prisma/client";
 
-interface roomId {
-    roomId:number,
-    price:number
+interface addAuction {
+    userId: number,
+    socket: WebSocket,
+    auctionId: number,
+    fullname: string,
+    profileUrl: string,
+    price: string
 }
 
 export class roomManager {
@@ -16,7 +20,6 @@ export class roomManager {
     };
 
     async checkValidation (auctionId:number, userId:number,socket:WebSocket) {
-
         const checkRegistration = await this.prisma.auctionRegistration.findFirst({
             where:{
                 userId:userId,
@@ -33,25 +36,28 @@ export class roomManager {
             socket.send(JSON.stringify(errMsg));
             return
         }
-
-        return checkRegistration
+        const {fullname} = checkRegistration.user;
+        const profileUrl = "dummy url";
+        const {price} = checkRegistration.auction;
+        return {auctionId,fullname,profileUrl,price,userId}
     };
 
 
 
-    addAuction({userId,socket,fullName,profileUrl,roomId,price}:memberData&roomId){
-        if (!this.auctionStore.has(roomId)) {
-            const creator = [{userId,socket,fullName,profileUrl}]
-            this.auctionStore.set(roomId,{members:creator,price:[{price:price,userId}]})
+    addAuction({userId,socket,fullname,profileUrl,auctionId,price}:addAuction){
+        const priceInt = Number(price)
+        if (!this.auctionStore.has(auctionId)) {
+            const creator = [{userId,socket,fullname,profileUrl}]
+            this.auctionStore.set(auctionId,{members:creator,price:[{price:priceInt,userId}]})
         }
         else {
-            const existingAuction = this.auctionStore.get(roomId);
-            const newMember = {userId,socket,fullName,profileUrl}
+            const existingAuction = this.auctionStore.get(auctionId);
+            const newMember = {userId,socket,fullname,profileUrl}
             if (!existingAuction?.members) {
                 return
             };
             const updatedMembers = [...existingAuction?.members,newMember];
-            this.auctionStore.set(roomId,{members:updatedMembers,price:existingAuction.price})
+            this.auctionStore.set(auctionId,{members:updatedMembers,price:existingAuction.price})
         }
     }
 }
