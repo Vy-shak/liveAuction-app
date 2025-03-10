@@ -39,17 +39,19 @@ function page() {
         });
 
         if (check.data.details) {
+          console.log("bro",check.data.details)
           const currentDate = new Date();
           const startDate = check.data.details.auction.startDate;
-          if (currentDate<startDate) {
-             const timeRemains = getTimeLeft(startDate,currentDate);
-             console.log("time",timeRemains)
-          }
-
-           setRegistered((prev)=>true)
+          // const timeRemains = getTimeLeft(startDate,currentDate);
+          // console.log("time",timeRemains)
+          // // if (currentDate<startDate) {
+          // //    const timeRemains = getTimeLeft(startDate,currentDate);
+          // //    console.log("time",timeRemains)
+          // // }
+          setRegistered(true)
         }
       } catch (error) {
-        
+        console.log(error)
       }
     };
     checkRegistration();
