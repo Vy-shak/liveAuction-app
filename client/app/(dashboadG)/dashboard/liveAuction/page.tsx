@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import AuctionHeader from '@/components/live/AuctionHeader'
 import ParticipantCard from '@/components/live/ParticipantCard'
+import BiddingCard from '@/components/live/BiddingCard'
 import { UseSelectedAuction } from '@/lib/stateStore/auctionsList'
 import { UsefetchUser } from '@/app/hooks/UsefetchData'
 import { useRouter } from 'next/navigation'
@@ -12,7 +13,6 @@ function page() {
   const {selectedAuction} = UseSelectedAuction();
   const {userdata} = UsefetchUser("user/getData");
   const [membersList,setMembersList] = useState(null);
-  console.log(membersList)
   const Router = useRouter()
   useEffect(()=>{
     if (!selectedAuction) {
@@ -46,7 +46,7 @@ function page() {
     <section className='w-full gap-y-8 flexStart flex-col h-screen pt-20 pl-20 pr-4 bg-neutral-200'>
       <AuctionHeader fullname={"dump"} price={'dump'} profileUrl={"dump"} />
       {membersList&&<ParticipantCard allMembers={membersList} />}
-
+      <BiddingCard/>
     </section>
   )
 }
