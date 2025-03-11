@@ -23,32 +23,39 @@ wss.on('connection', function connection(socket, req) {
         const urlParams = new URLSearchParams(req.url.split('?')[1]);
         const token = urlParams.get('token');
         let auctioncode = urlParams.get('auctionCode');
+        console.log("hyyy", auctioncode);
         const auctionId = Number(auctioncode);
         if (!token) {
             const errMsg = { type: 'error', err: "the jwt token not present" };
             socket.send(JSON.stringify(errMsg));
-            return;
-        }
-        if (!auctioncode) {
-            const errMsg = { type: 'error', err: "the auction Code is not presnt" };
-            socket.send(JSON.stringify(errMsg));
+            socket.close();
             return;
         }
         const userId = yield (0, authCheck_1.authCheck)(token);
         if (!userId) {
             const errMsg = { type: 'error', err: "can not get the userId" };
             socket.send(JSON.stringify(errMsg));
+            socket.terminate();
+            return;
+        }
+        if (!auctioncode) {
+            const errMsg = { type: 'error', err: "the auction Code is not presnt" };
+            console.log("youoo");
+            socket.send(JSON.stringify(errMsg));
+            socket.close();
             return;
         }
         const fullAuctionDetails = yield auctionManager.checkValidation(auctionId, userId, socket);
         if (!fullAuctionDetails) {
             const errMsg = { type: 'error', err: "can not get fullAuctiondetails" };
             socket.send(JSON.stringify(errMsg));
+            socket.terminate();
             return;
         }
         if (fullAuctionDetails.auctionId !== auctionId && fullAuctionDetails.userId !== userId) {
             const errMsg = { type: 'error', err: "mismatch in the credentials" };
             socket.send(JSON.stringify(errMsg));
+            socket.terminate();
             return;
         }
         const { fullname, profileUrl, price } = fullAuctionDetails;

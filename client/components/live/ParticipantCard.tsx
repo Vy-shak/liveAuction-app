@@ -11,7 +11,7 @@ function ParticipantCard() {
         <Button>Leave</Button>
       </div>
       <div className='w-full flexStart'>
-        <Members fullname={"dump"}  imgUrl={"dump"} />
+        {/* <Members fullname={"dump"}  imgUrl={"dump"} /> */}
       </div>
     </div>
   )

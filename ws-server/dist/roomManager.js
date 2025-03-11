@@ -19,6 +19,14 @@ class roomManager {
     ;
     checkValidation(auctionId, userId, socket) {
         return __awaiter(this, void 0, void 0, function* () {
+            if (!auctionId) {
+                socket.send("auctionId missing");
+                return;
+            }
+            if (!userId) {
+                socket.send(" Userid missing");
+                return;
+            }
             const checkRegistration = yield this.prisma.auctionRegistration.findFirst({
                 where: {
                     userId: userId,

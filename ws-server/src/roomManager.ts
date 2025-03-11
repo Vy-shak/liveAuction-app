@@ -29,6 +29,14 @@ export class roomManager {
     };
 
     async checkValidation (auctionId:number, userId:number,socket:WebSocket) {
+        if (!auctionId) {
+            socket.send("auctionId missing")
+            return
+        }
+        if (!userId) {
+            socket.send(" Userid missing")
+            return
+        }
         const checkRegistration = await this.prisma.auctionRegistration.findFirst({
             where:{
                 userId:userId,

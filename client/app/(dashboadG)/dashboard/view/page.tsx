@@ -137,7 +137,7 @@ function page() {
         <Ownercard />
       </div>
       {!registered&&<Button onClick={handleRegister} className='w-full'>Register</Button>}
-      {registered&&<Link className='w-full' href={"/dashboard/live"}>
+      {registered&&<Link className='w-full' href={"/dashboard/liveAuction"}>
       <Button className='w-full'>View auction</Button>
       </Link>}
     </section>
