@@ -119,9 +119,9 @@ export class roomManager {
         const newPrice = [...existingPrices,{price:price, fullname:fullname, profileUrl: profileUrl, userId:userId}];
         this.auctionStore.set(auctionId,{members:existingMembers,price:newPrice});
 
-        const updatedPrice = this.auctionStore.get(auctionId)?.price[n];
-        console.log(this.auctionStore.get(auctionId)?.price)
-        socket.send(JSON.stringify(updatedPrice))
+        const priceList = this.auctionStore.get(auctionId)?.price;
+        const priceData = {type:'price',priceList:priceList}
+        socket.send(JSON.stringify(priceData))
     }
 }
 

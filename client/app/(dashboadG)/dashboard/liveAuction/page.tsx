@@ -8,10 +8,12 @@ import { UseSelectedAuction } from '@/lib/stateStore/auctionsList'
 import { UsefetchUser } from '@/app/hooks/UsefetchData'
 import { useRouter } from 'next/navigation'
 import { any } from 'zod'
+import usePrice from '@/lib/stateStore/priceStore'
 
 function page() {
   const {selectedAuction} = UseSelectedAuction();
   const {userdata} = UsefetchUser("user/getData");
+  const {price,updatePrice} = usePrice()
   const [membersList,setMembersList] = useState(null);
   const Router = useRouter()
   useEffect(()=>{
@@ -35,6 +37,9 @@ function page() {
         if (wsData.type == 'member') {
           setMembersList(wsData.members)
         }
+        if (wsData.type == 'price') {
+          setMembersList(wsData.members)
+        }
       }
     })();
 
@@ -42,9 +47,16 @@ function page() {
 
   },[])
 
+  useEffect(()=>{
+    if (price<Number(selectedAuction?.price)) {
+       updatePrice(Number(selectedAuction?.price));
+
+    }
+  },[selectedAuction?.price])
+
   return (
     <section className='w-full gap-y-8 flexStart flex-col h-screen pt-20 pl-20 pr-4 bg-neutral-200'>
-      <AuctionHeader fullname={"dump"} price={'dump'} profileUrl={"dump"} />
+      <AuctionHeader fullname={"dump"} price={"dump"} profileUrl={"dump"} />
       {membersList&&<ParticipantCard allMembers={membersList} />}
       <BiddingCard/>
     </section>
