@@ -1,10 +1,11 @@
 import React from 'react'
+import AuctionHeader from '@/components/live/AuctionHeader'
 
 function page() {
   return (
-    <div>
-      
-    </div>
+    <section className='w-full h-full bg-neutral-200'>
+      <AuctionHeader/>
+    </section>
   )
 }
 
