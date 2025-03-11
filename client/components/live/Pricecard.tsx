@@ -9,7 +9,7 @@ interface pricecard {
 
 function Pricecard({imgUrl,fullname,price}:pricecard) {
   return (
-    <div className='flexStart flex-col'>
+    <div className='flexStart  flex-col'>
         <div className='flexCenter'>
             <Image width={40} height={40} alt='no image' src={imgUrl}/>
             <span>{fullname} </span>
