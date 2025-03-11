@@ -7,7 +7,7 @@ function ParticipantCard() {
   return (
     <div className='w-full bg-white'>
       <div className='w-full h-fit flex justify-between items-center'>
-        <span>Participants</span>
+        <span className='text-neutral-700 text-xl font-semibold'>Participants</span>
         <Button>Leave</Button>
       </div>
       <div className='w-full flexStart'>
