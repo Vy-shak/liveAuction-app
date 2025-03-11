@@ -26,7 +26,7 @@ wss.on('connection', async function connection(socket,req) {
   if (!userId) {
     const errMsg = {type:'error',err:"can not get the userId"}
     socket.send(JSON.stringify(errMsg))
-    socket.terminate();
+    socket.close();
     return
   }
 
@@ -41,13 +41,13 @@ wss.on('connection', async function connection(socket,req) {
   if (!fullAuctionDetails) {
     const errMsg = {type:'error',err:"can not get fullAuctiondetails"}
     socket.send(JSON.stringify(errMsg))
-    socket.terminate();
+    socket.close();
     return
   }
   if (fullAuctionDetails.auctionId!==auctionId&&fullAuctionDetails.userId!==userId) {
     const errMsg = {type:'error',err:"mismatch in the credentials"}
     socket.send(JSON.stringify(errMsg))
-    socket.terminate();
+    socket.close();
     return
   }
 
@@ -64,6 +64,4 @@ wss.on('connection', async function connection(socket,req) {
        auctionManager.updatePrice({price,socket, userId, profileUrl,auctionId,fullname})
     } 
   });
-
-  socket.send('server connected');
 })

@@ -53,8 +53,8 @@ export class roomManager {
             socket.send(JSON.stringify(errMsg));
             return
         }
-        const {fullname} = checkRegistration.user;
-        const profileUrl = "dummy url";
+        const {fullname,imgUrl} = checkRegistration.user;
+        const profileUrl = imgUrl;
         const {price} = checkRegistration.auction;
         return {auctionId,fullname,profileUrl,price,userId}
     };
@@ -65,16 +65,25 @@ export class roomManager {
         const priceInt = Number(price)
         if (!this.auctionStore.has(auctionId)) {
             const creator = [{userId,socket,fullname,profileUrl}]
-            this.auctionStore.set(auctionId,{members:creator,price:[{price:priceInt,userId}]})
+            this.auctionStore.set(auctionId,{members:creator,price:[{price:priceInt,userId,fullname,profileUrl}]})
+            
+            const allData = {type:"member",members:this.auctionStore.get(auctionId)?.members}
+            const stringfyAll = JSON.stringify(allData)
+            socket.send(stringfyAll)
         }
         else {
-            const existingAuction = this.auctionStore.get(auctionId);
+            let existingAuction = this.auctionStore.get(auctionId);
             const newMember = {userId,socket,fullname,profileUrl}
             if (!existingAuction?.members) {
                 return
             };
-            const updatedMembers = [...existingAuction?.members,newMember];
-            this.auctionStore.set(auctionId,{members:updatedMembers,price:existingAuction.price})
+            const filterExisting = existingAuction?.members.filter((item)=>item.userId!==userId)
+            const updatedMembers = [...filterExisting,newMember];
+            this.auctionStore.set(auctionId,{members:updatedMembers,price:existingAuction.price});
+
+            const allData = {type:"member",members:this.auctionStore.get(auctionId)?.members}
+            const stringfyAll = JSON.stringify(allData)
+            socket.send(stringfyAll)
         };
         // console.log(this.auctionStore)
         // console.log(this.auctionStore.get(auctionId)?.members)
@@ -107,7 +116,7 @@ export class roomManager {
             return
         }
 
-        const newPrice = [...existingPrices,{price:price,userId:userId}];
+        const newPrice = [...existingPrices,{price:price, fullname:fullname, profileUrl: profileUrl, userId:userId}];
         this.auctionStore.set(auctionId,{members:existingMembers,price:newPrice});
 
         const updatedPrice = this.auctionStore.get(auctionId)?.price[n];

@@ -15,6 +15,8 @@ interface memberData {
 interface priceData {
     price:number,
     userId:number,
+    fullname:string,
+    profileUrl:string,
 }
 
 interface auctions {

@@ -11,32 +11,13 @@ import { useRouter } from 'next/navigation'
 interface auctionHeader {
   price:string,
   fullname:string,
-  profileUrl:string
+  profileUrl:string,
 }
 
 function AuctionHeader({ price,fullname,profileUrl }: auctionHeader) {
   const {selectedAuction} = UseSelectedAuction();
   const {userdata} = UsefetchUser("user/getData");
   const Router = useRouter()
-  useEffect(()=>{
-    if (!selectedAuction) {
-      Router.back()
-    };
-
-    (function connectTows() {
-      const auctionId = selectedAuction?.id;
-      const token = localStorage.getItem("token")
-      console.log(auctionId)
-      if (!auctionId&&!token) {
-        console.log("params not present")
-        return 
-      };
-
-      const ws = new WebSocket(`ws://localhost:8080?token=${token}&auctionCode=${auctionId}`);
-
-    })()
-
-  },[])
 
   return (
     <div className='w-full flexStart rounded-lg px-12 py-4 flex-col  bg-white'>

@@ -42,28 +42,36 @@ class roomManager {
                 socket.send(JSON.stringify(errMsg));
                 return;
             }
-            const { fullname } = checkRegistration.user;
-            const profileUrl = "dummy url";
+            const { fullname, imgUrl } = checkRegistration.user;
+            const profileUrl = imgUrl;
             const { price } = checkRegistration.auction;
             return { auctionId, fullname, profileUrl, price, userId };
         });
     }
     ;
     addAuction({ userId, socket, fullname, profileUrl, auctionId, price }) {
+        var _a, _b;
         const priceInt = Number(price);
         if (!this.auctionStore.has(auctionId)) {
             const creator = [{ userId, socket, fullname, profileUrl }];
-            this.auctionStore.set(auctionId, { members: creator, price: [{ price: priceInt, userId }] });
+            this.auctionStore.set(auctionId, { members: creator, price: [{ price: priceInt, userId, fullname, profileUrl }] });
+            const allData = { type: "member", members: (_a = this.auctionStore.get(auctionId)) === null || _a === void 0 ? void 0 : _a.members };
+            const stringfyAll = JSON.stringify(allData);
+            socket.send(stringfyAll);
         }
         else {
-            const existingAuction = this.auctionStore.get(auctionId);
+            let existingAuction = this.auctionStore.get(auctionId);
             const newMember = { userId, socket, fullname, profileUrl };
             if (!(existingAuction === null || existingAuction === void 0 ? void 0 : existingAuction.members)) {
                 return;
             }
             ;
-            const updatedMembers = [...existingAuction === null || existingAuction === void 0 ? void 0 : existingAuction.members, newMember];
+            const filterExisting = existingAuction === null || existingAuction === void 0 ? void 0 : existingAuction.members.filter((item) => item.userId !== userId);
+            const updatedMembers = [...filterExisting, newMember];
             this.auctionStore.set(auctionId, { members: updatedMembers, price: existingAuction.price });
+            const allData = { type: "member", members: (_b = this.auctionStore.get(auctionId)) === null || _b === void 0 ? void 0 : _b.members };
+            const stringfyAll = JSON.stringify(allData);
+            socket.send(stringfyAll);
         }
         ;
         // console.log(this.auctionStore)
@@ -93,7 +101,7 @@ class roomManager {
         if (!existingMembers) {
             return;
         }
-        const newPrice = [...existingPrices, { price: price, userId: userId }];
+        const newPrice = [...existingPrices, { price: price, fullname: fullname, profileUrl: profileUrl, userId: userId }];
         this.auctionStore.set(auctionId, { members: existingMembers, price: newPrice });
         const updatedPrice = (_c = this.auctionStore.get(auctionId)) === null || _c === void 0 ? void 0 : _c.price[n];
         console.log((_d = this.auctionStore.get(auctionId)) === null || _d === void 0 ? void 0 : _d.price);

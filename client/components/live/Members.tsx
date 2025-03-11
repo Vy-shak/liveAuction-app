@@ -9,8 +9,8 @@ interface members {
 
 function Members({imgUrl,fullname}:members) {
   return (
-    <div className='flexCenter w-fit h-fit'>
-      <Image alt='image' src={imgUrl} />
+    <div className='flexCenter flex-col gap-x-2 w-fit h-fit'>
+      <Image width={80} height={80} alt='image' src={imgUrl} />
       <span>{fullname}</span>
     </div>
   )
