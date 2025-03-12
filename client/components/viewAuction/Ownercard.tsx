@@ -7,7 +7,7 @@ function Ownercard() {
       const {userdata} = UsefetchUser("user/getData");
   console.log("the userdate",userdata)
   return (
-    <div className='w-full flex-1 bg-white rounded py-4  px-5 h-full flex-1 min-w-64 '>
+    <div className='w-full bg-white rounded py-4  px-5 h-full flex-1 min-w-64 '>
       <span className='text-neutral-600 font-semibold'>OWNER</span>
       <div className='w-full gap-y-4 flexStart flex-col'>
       <div className='w-full h-20 border-2 border-neutral-100 px-6 flex justify-start items-center gap-x-4 rounded'>

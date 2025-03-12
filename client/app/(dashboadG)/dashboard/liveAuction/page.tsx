@@ -13,6 +13,7 @@ import usePrice from '@/lib/stateStore/priceStore'
 function page() {
   const {selectedAuction} = UseSelectedAuction();
   const {userdata} = UsefetchUser("user/getData");
+  const [socket,setSocket] = useState<WebSocket|null>(null)
   const {price,updatePrice} = usePrice()
   const [membersList,setMembersList] = useState(null);
   const Router = useRouter()
@@ -31,7 +32,9 @@ function page() {
       };
 
       const ws = new WebSocket(`ws://localhost:8080?token=${token}&auctionCode=${auctionId}`);
-
+      ws.onopen = function(){
+        setSocket(ws)
+      }
       ws.onmessage = function(event){
         const wsData = JSON.parse(event.data)
         if (wsData.type == 'member') {
@@ -58,7 +61,7 @@ function page() {
     <section className='w-full gap-y-8 flexStart flex-col h-screen pt-20 pl-20 pr-4 bg-neutral-200'>
       <AuctionHeader fullname={"dump"} price={"dump"} profileUrl={"dump"} />
       {membersList&&<ParticipantCard allMembers={membersList} />}
-      <BiddingCard/>
+      {socket&&userdata&&selectedAuction&&<BiddingCard profileUrl={userdata.imgUrl} socket={socket} auctionId={selectedAuction?.id} userId={userdata.id} fullname={userdata.fullname}/>}
     </section>
   )
 }
