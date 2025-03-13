@@ -3,6 +3,7 @@ import { Minus, Plus } from "lucide-react"
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import myUserstore from '@/lib/stateStore/myUserdetails'
+import auctionPrice from '@/lib/stateStore/auctionPrice'
 import { useRef } from 'react'
 
 interface biddingDetails {
@@ -12,7 +13,8 @@ interface biddingDetails {
 
 
 function BiddingCard({auctionId,socket}:biddingDetails) {
-    const myPriceRef = useRef<HTMLInputElement>(null)
+    const myPriceRef = useRef<HTMLInputElement>(null);
+    const  {priceData}= auctionPrice()
     const {myuser} = myUserstore();
 
     const handlePrice = ()=>{
@@ -28,7 +30,7 @@ function BiddingCard({auctionId,socket}:biddingDetails) {
             <div className='flexCenter flex-col gap-y-2'>
                 <div className='flexCenter cursor-pointer gap-x-6'>
                     {/* <Minus onClick={reducePrice} /> */}
-                    <Input type='number' ref={myPriceRef}/>
+                    <Input placeholder={priceData.price.toString()}   type='number' ref={myPriceRef}/>
                     {/* <Plus scale={1.5} onClick={addPrice} /> */}
                 </div>  
                 <Button onClick={handlePrice} className='w-full'>Bid</Button>
