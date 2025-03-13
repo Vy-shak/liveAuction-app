@@ -7,16 +7,28 @@ import BiddingCard from '@/components/live/BiddingCard'
 import { UseSelectedAuction } from '@/lib/stateStore/auctionsList'
 import { UsefetchUser } from '@/app/hooks/UsefetchData'
 import { useRouter } from 'next/navigation'
-import { any } from 'zod'
-import usePrice from '@/lib/stateStore/priceStore'
+import myUserstore from '@/lib/stateStore/myUserdetails'
+import auctionPrice from '@/lib/stateStore/auctionPrice'
 
 function page() {
   const {selectedAuction} = UseSelectedAuction();
   const {userdata} = UsefetchUser("user/getData");
+  const {updatePrice} = auctionPrice()
+  const {myuser,updateMyuser} = myUserstore();
   const [socket,setSocket] = useState<WebSocket|null>(null)
-  const {price,updatePrice} = usePrice()
   const [membersList,setMembersList] = useState(null);
   const Router = useRouter()
+
+  useEffect(()=>{
+    if (userdata) {
+      console.log(userdata)
+      updateMyuser({type:"userId",val:userdata.id})
+      updateMyuser({type:"profileUrl",val:userdata.imgUrl})
+      updateMyuser({type:"fullname",val:userdata.fullname})
+    }
+  },[userdata]);
+
+
   useEffect(()=>{
     if (!selectedAuction) {
       Router.back()
@@ -41,27 +53,20 @@ function page() {
           setMembersList(wsData.members)
         }
         if (wsData.type == 'price') {
-          setMembersList(wsData.members)
+          const n = wsData.priceList.length;
+          updatePrice(wsData.priceList[n-1])
         }
       }
     })();
 
-
-
   },[])
 
-  useEffect(()=>{
-    if (price<Number(selectedAuction?.price)) {
-       updatePrice(Number(selectedAuction?.price));
-
-    }
-  },[selectedAuction?.price])
 
   return (
     <section className='w-full gap-y-8 flexStart flex-col h-screen pt-20 pl-20 pr-4 bg-neutral-200'>
-      <AuctionHeader fullname={"dump"} price={"dump"} profileUrl={"dump"} />
+      <AuctionHeader />
       {membersList&&<ParticipantCard allMembers={membersList} />}
-      {socket&&userdata&&selectedAuction&&<BiddingCard profileUrl={userdata.imgUrl} socket={socket} auctionId={selectedAuction?.id} userId={userdata.id} fullname={userdata.fullname}/>}
+      {socket&&userdata&&selectedAuction&&<BiddingCard  socket={socket} auctionId={selectedAuction?.id} />}
     </section>
   )
 }

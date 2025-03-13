@@ -1,39 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Minus, Plus } from "lucide-react"
 import { Button } from '../ui/button'
-import usePrice from '@/lib/stateStore/priceStore'
-import { Socket } from 'dgram'
+import { Input } from '../ui/input'
+import myUserstore from '@/lib/stateStore/myUserdetails'
+import { useRef } from 'react'
 
 interface biddingDetails {
-    fullname:string,
-    userId:number,
     auctionId:number,
-    profileUrl:string,
     socket:WebSocket
 }
 
 
-function BiddingCard({fullname,userId,auctionId,profileUrl,socket}:biddingDetails) {
-    const {price,updatePrice} = usePrice();
-    const addPrice = ()=>{
-      updatePrice(price+1)
-    }
-    const reducePrice = ()=>{
-      updatePrice(price-1)
-    }
+function BiddingCard({auctionId,socket}:biddingDetails) {
+    const myPriceRef = useRef<HTMLInputElement>(null)
+    const {myuser} = myUserstore();
 
     const handlePrice = ()=>{
-        const priceData = {type:"price",fullname,userId,auctionId,profileUrl,price}
+        if(!myuser.fullname&&!myuser.profileUrl&&!myuser.userId&&myPriceRef.current?.value) {
+            console.log("returning")
+            return
+        }
+        const priceData = {type:"price",fullname:myuser.fullname,userId:myuser.userId,auctionId,profileUrl:myuser.profileUrl,price:myPriceRef.current?.value};
         socket.send(JSON.stringify(priceData))
     }
     return (
         <div className='w-full bg-white py-16 rounded-lg flexCenter'>
             <div className='flexCenter flex-col gap-y-2'>
                 <div className='flexCenter cursor-pointer gap-x-6'>
-                    <Minus onClick={reducePrice} />
-                    <span className='font-bold text-6xl'>{price}</span>
-                    <Plus scale={1.5} onClick={addPrice} />
-                </div>
+                    {/* <Minus onClick={reducePrice} /> */}
+                    <Input type='number' ref={myPriceRef}/>
+                    {/* <Plus scale={1.5} onClick={addPrice} /> */}
+                </div>  
                 <Button onClick={handlePrice} className='w-full'>Bid</Button>
             </div>
         </div>

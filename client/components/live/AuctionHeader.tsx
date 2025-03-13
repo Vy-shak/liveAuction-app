@@ -4,8 +4,7 @@ import Image from 'next/image'
 import React, { useEffect } from 'react'
 import Pricecard from './Pricecard'
 import { UseSelectedAuction } from '@/lib/stateStore/auctionsList'
-import { UsefetchUser } from '@/app/hooks/UsefetchData';
-import axios from 'axios';
+import auctionPrice from '@/lib/stateStore/auctionPrice'
 import { useRouter } from 'next/navigation'
 
 interface auctionHeader {
@@ -14,10 +13,9 @@ interface auctionHeader {
   profileUrl:string,
 }
 
-function AuctionHeader({ price,fullname,profileUrl }: auctionHeader) {
+function  AuctionHeader() {
   const {selectedAuction} = UseSelectedAuction();
-  const {userdata} = UsefetchUser("user/getData");
-  const Router = useRouter()
+  const {priceData}  = auctionPrice()
 
   return (
     <div className='w-full flexStart rounded-lg px-12 py-4 flex-col  bg-white'>
@@ -33,7 +31,7 @@ function AuctionHeader({ price,fullname,profileUrl }: auctionHeader) {
             <span className='text-neutral-700 text-sm font-semibold'>{`${selectedAuction?.kmCovered} Km`}</span>
           </div>
         </div>
-        {selectedAuction?.price && userdata && <Pricecard price={selectedAuction.price} fullname={userdata.fullname} imgUrl={userdata.imgUrl} />}
+        {selectedAuction?.price&&<Pricecard price={priceData.price} />}
       </div>
     </div>
   )
