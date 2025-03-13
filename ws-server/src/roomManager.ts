@@ -30,12 +30,15 @@ export class roomManager {
 
     async checkValidation (auctionId:number, userId:number,socket:WebSocket) {
         if (!auctionId) {
-            socket.send("auctionId missing")
-            return
-        }
+            const errMsg = {type:'error',err:"auctionId is missing"}
+            socket.send(JSON.stringify(errMsg))
+            socket.close();
+            return        }
         if (!userId) {
-            socket.send(" Userid missing")
-            return
+            const errMsg = {type:'error',err:"userId is missing"}
+            socket.send(JSON.stringify(errMsg))
+            socket.close();
+            return        
         }
         const checkRegistration = await this.prisma.auctionRegistration.findFirst({
             where:{
@@ -67,9 +70,12 @@ export class roomManager {
             const creator = [{userId,socket,fullname,profileUrl}]
             this.auctionStore.set(auctionId,{members:creator,price:[{price:priceInt,userId,fullname,profileUrl}]})
             
-            const allData = {type:"member",members:this.auctionStore.get(auctionId)?.members}
-            const stringfyAll = JSON.stringify(allData)
-            socket.send(stringfyAll)
+            const membersData = {type:"member",members:this.auctionStore.get(auctionId)?.members}
+            const priceData = {type:"price",priceList:this.auctionStore.get(auctionId)?.price}
+            const strMembers = JSON.stringify(membersData)
+            const strPrices = JSON.stringify(priceData)
+            socket.send(strMembers)
+            socket.send(strPrices)
         }
         else {
             let existingAuction = this.auctionStore.get(auctionId);
@@ -81,9 +87,12 @@ export class roomManager {
             const updatedMembers = [...filterExisting,newMember];
             this.auctionStore.set(auctionId,{members:updatedMembers,price:existingAuction.price});
 
-            const allData = {type:"member",members:this.auctionStore.get(auctionId)?.members}
-            const stringfyAll = JSON.stringify(allData)
-            socket.send(stringfyAll)
+            const membersData = {type:"member",members:this.auctionStore.get(auctionId)?.members}
+            const priceData = {type:"price",priceList:this.auctionStore.get(auctionId)?.price}
+            const strMembers = JSON.stringify(membersData)
+            const strPrices = JSON.stringify(priceData)
+            socket.send(strMembers)
+            socket.send(strPrices)
         };
         // console.log(this.auctionStore)
         // console.log(this.auctionStore.get(auctionId)?.members)

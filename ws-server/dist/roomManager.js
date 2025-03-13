@@ -20,11 +20,15 @@ class roomManager {
     checkValidation(auctionId, userId, socket) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!auctionId) {
-                socket.send("auctionId missing");
+                const errMsg = { type: 'error', err: "auctionId is missing" };
+                socket.send(JSON.stringify(errMsg));
+                socket.close();
                 return;
             }
             if (!userId) {
-                socket.send(" Userid missing");
+                const errMsg = { type: 'error', err: "userId is missing" };
+                socket.send(JSON.stringify(errMsg));
+                socket.close();
                 return;
             }
             const checkRegistration = yield this.prisma.auctionRegistration.findFirst({
@@ -50,14 +54,17 @@ class roomManager {
     }
     ;
     addAuction({ userId, socket, fullname, profileUrl, auctionId, price }) {
-        var _a, _b;
+        var _a, _b, _c, _d;
         const priceInt = Number(price);
         if (!this.auctionStore.has(auctionId)) {
             const creator = [{ userId, socket, fullname, profileUrl }];
             this.auctionStore.set(auctionId, { members: creator, price: [{ price: priceInt, userId, fullname, profileUrl }] });
-            const allData = { type: "member", members: (_a = this.auctionStore.get(auctionId)) === null || _a === void 0 ? void 0 : _a.members };
-            const stringfyAll = JSON.stringify(allData);
-            socket.send(stringfyAll);
+            const membersData = { type: "member", members: (_a = this.auctionStore.get(auctionId)) === null || _a === void 0 ? void 0 : _a.members };
+            const priceData = { type: "price", priceList: (_b = this.auctionStore.get(auctionId)) === null || _b === void 0 ? void 0 : _b.price };
+            const strMembers = JSON.stringify(membersData);
+            const strPrices = JSON.stringify(priceData);
+            socket.send(strMembers);
+            socket.send(strPrices);
         }
         else {
             let existingAuction = this.auctionStore.get(auctionId);
@@ -69,9 +76,12 @@ class roomManager {
             const filterExisting = existingAuction === null || existingAuction === void 0 ? void 0 : existingAuction.members.filter((item) => item.userId !== userId);
             const updatedMembers = [...filterExisting, newMember];
             this.auctionStore.set(auctionId, { members: updatedMembers, price: existingAuction.price });
-            const allData = { type: "member", members: (_b = this.auctionStore.get(auctionId)) === null || _b === void 0 ? void 0 : _b.members };
-            const stringfyAll = JSON.stringify(allData);
-            socket.send(stringfyAll);
+            const membersData = { type: "member", members: (_c = this.auctionStore.get(auctionId)) === null || _c === void 0 ? void 0 : _c.members };
+            const priceData = { type: "price", priceList: (_d = this.auctionStore.get(auctionId)) === null || _d === void 0 ? void 0 : _d.price };
+            const strMembers = JSON.stringify(membersData);
+            const strPrices = JSON.stringify(priceData);
+            socket.send(strMembers);
+            socket.send(strPrices);
         }
         ;
         // console.log(this.auctionStore)
