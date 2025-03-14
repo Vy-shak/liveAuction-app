@@ -32,7 +32,7 @@ function RegisteredCard({ imgUrl, brand, item, model, endDate, startDate }: regi
     setUpdate(true);
   }
   return (
-    <Link href={"/dashboard/view"}>
+    <Link className='w-full pr-4' href={"/dashboard/view"}>
       <div onClick={viewAuction} className='w-full flexCenter rounded-md bg-white px-8 py-4'>
         <div className='w-full flexStart flex-col'>
           <div className='w-fit h-fit flexCenter gap-y-2 flex-col'>
