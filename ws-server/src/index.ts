@@ -14,7 +14,7 @@ wss.on('connection', async function connection(socket,req) {
   const urlParams = new URLSearchParams(req.url.split('?')[1]);
   const token = urlParams.get('token');
   let auctioncode = urlParams.get('auctionCode');
-  console.log("hyyy",auctioncode)
+  console.log("hyyyd",auctioncode)
   const auctionId = Number(auctioncode);
   if (!token) {
     const errMsg = {type:'error',err:"the jwt token not present"}
