@@ -1,6 +1,5 @@
 "use client"
 
-import React, { useEffect } from 'react'
 import {RenderAuctions} from '../../../../components/index';
 
 function page() {

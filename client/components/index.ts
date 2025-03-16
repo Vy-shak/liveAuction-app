@@ -18,10 +18,6 @@ import { RenderAuctions } from "./dashboard/RenderAuctions"
 import Userprofile from "./dashboard/Userprofile"
 import { Textarea } from "./ui/textarea"
 import { Infocard } from "./viewAuction/Infocard"
-import OverviewCard from "./viewAuction/OverviewCard"
-import Ownercard from "./viewAuction/Ownercard"
-import Pricecard from "./viewAuction/Pricecard"
-import Discriptioncard from "./viewAuction/Discriptioncard"
 
 
-export {Button,Input, Infocard,OverviewCard, Ownercard, Pricecard, Discriptioncard,YourName,Userprofile, Textarea, Auctioncard, RenderAuctions, VehicleImg, Vehicledetails, AuctionName, Sidebarmenu,NavbarD, Sidebar, Signinform, Navbar,Progressdiv,YourEmail,YourPassword,YourProfile}
+export {Button,Input, Infocard,YourName,Userprofile, Textarea, Auctioncard, RenderAuctions, VehicleImg, Vehicledetails, AuctionName, Sidebarmenu,NavbarD, Sidebar, Signinform, Navbar,Progressdiv,YourEmail,YourPassword,YourProfile}

@@ -24,7 +24,7 @@ const initialVal: UserDetails = {
   profileUrl: '',
 };
 
-const useUserStore = create<Store>((set) => ({
+const UseUserStore = create<Store>((set) => ({
   userData: initialVal,
   updateUserData: ({ type, val }) =>
     set((state) => {
@@ -34,4 +34,4 @@ const useUserStore = create<Store>((set) => ({
     }),
 }));
 
-export default useUserStore;
+export default UseUserStore;

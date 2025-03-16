@@ -10,7 +10,7 @@ type Pricestore = {
   updatePrice: (updates: Partial<Pricestore["priceData"]>) => void;
 };
 
-const auctionPrice = create<Pricestore>((set) => ({
+const UseauctionPrice = create<Pricestore>((set) => ({
   priceData: {
     price: 0,
     fullName: "",
@@ -23,4 +23,4 @@ const auctionPrice = create<Pricestore>((set) => ({
     })),
 }));
 
-export default auctionPrice;
+export default UseauctionPrice;

@@ -5,9 +5,9 @@ type store ={
     updateCount:()=>void
 }
 
-const useCount = create<store>()((set)=>({
+const UseCount = create<store>()((set)=>({
     count:1,
     updateCount:()=>set((state)=>({count:state.count+1}))
 }))
 
-export default useCount
+export default UseCount

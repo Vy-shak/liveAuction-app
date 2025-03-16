@@ -49,7 +49,7 @@ const initialVal: auctionData = {
     updateAuctiondata: (data: SetterProp) => void;
   }
 
-  const useAuctiondata = create<Store>((set) => ({
+  const UseAuctiondata = create<Store>((set) => ({
     auctionData: initialVal,
     updateAuctiondata: ({ type, val }) =>
       set((state) => {
@@ -60,4 +60,4 @@ const initialVal: auctionData = {
   }));
 
 
-export default useAuctiondata
+export default UseAuctiondata

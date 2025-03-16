@@ -14,7 +14,7 @@ function page() {
   const {selectedAuction} = UseSelectedAuction();
   const {userdata} = UsefetchUser("user/getData");
   const {updatePrice} = auctionPrice()
-  const {myuser,updateMyuser} = myUserstore();
+  const {updateMyuser} = myUserstore();
   const [socket,setSocket] = useState<WebSocket|null>(null)
   const [membersList,setMembersList] = useState(null);
   const Router = useRouter()
