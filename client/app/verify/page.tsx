@@ -3,12 +3,13 @@ import { YourName,YourEmail,YourPassword, Navbar, Progressdiv,YourProfile } from
 import { CarImg } from '@/public';
 import Image from 'next/image';
 import { Button } from '../../components/index';
-import { useUserStore ,useCount} from '@/lib/stateStore/index';
+import UseUserStore from '@/lib/stateStore/userStore';
+import UseCount from '@/lib/stateStore/dataCount';
 import axios from 'axios';
 
 export default function Authpage() {
-    const {count,updateCount} = useCount();
-    const {userData,updateUserData} = useUserStore();
+    const {count} = UseCount();
+    const {userData} = UseUserStore();
     console.log(userData)
 
     console.log("url",process.env.NEXT_PUBLIC_HTTP_URL)

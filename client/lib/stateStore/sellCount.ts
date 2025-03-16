@@ -10,4 +10,4 @@ const UseSellCount = create<store>()((set)=>({
     updateCount:()=>set((state)=>({count:state.count+1}))
 }))
 
-export default  UseSellCountseSellCount
+export default  UseSellCount

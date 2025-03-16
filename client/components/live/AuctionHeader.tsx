@@ -1,11 +1,10 @@
 "use client"
 
 import Image from 'next/image'
-import React, { useEffect } from 'react'
+import React from 'react'
 import Pricecard from './Pricecard'
 import { UseSelectedAuction } from '@/lib/stateStore/auctionsList'
 import auctionPrice from '@/lib/stateStore/auctionPrice'
-import { useRouter } from 'next/navigation'
 
 interface auctionHeader {
   price:string,

@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import { img } from 'motion/react-client'
 
 interface members {
     imgUrl:string,

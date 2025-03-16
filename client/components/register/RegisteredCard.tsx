@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import Image from 'next/image'
 import { convertUtcToLocal } from '@/app/utils/timeConvert'
 import { auctionData } from '@/app/Types/auctionsType'
 import { UseSelectedAuction } from '@/lib/stateStore/auctionsList'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { it } from 'node:test'
 
 interface register {
   imgUrl: string,

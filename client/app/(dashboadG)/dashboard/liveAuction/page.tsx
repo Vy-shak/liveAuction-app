@@ -7,14 +7,14 @@ import BiddingCard from '@/components/live/BiddingCard'
 import { UseSelectedAuction } from '@/lib/stateStore/auctionsList'
 import { UsefetchUser } from '@/app/hooks/UsefetchData'
 import { useRouter } from 'next/navigation'
-import myUserstore from '@/lib/stateStore/myUserdetails'
-import auctionPrice from '@/lib/stateStore/auctionPrice'
+import UsemyUserstore from '@/lib/stateStore/myUserdetails'
+import UseauctionPrice from '@/lib/stateStore/auctionPrice'
 
 function page() {
   const {selectedAuction} = UseSelectedAuction();
   const {userdata} = UsefetchUser("user/getData");
-  const {updatePrice} = auctionPrice()
-  const {updateMyuser} = myUserstore();
+  const {updatePrice} = UseauctionPrice()
+  const {updateMyuser} = UsemyUserstore();
   const [socket,setSocket] = useState<WebSocket|null>(null)
   const [membersList,setMembersList] = useState(null);
   const Router = useRouter()

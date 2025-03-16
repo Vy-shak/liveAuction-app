@@ -1,5 +1,5 @@
 'use client'
-import React, { use, useEffect } from 'react'
+import React  from 'react'
 import Auctioncard from '../home/Auctioncard';
 import { UsefetchAuctions } from '@/app/hooks/Usefetchauction';
 import Loadingbox from '../Loader/LoadingBox';

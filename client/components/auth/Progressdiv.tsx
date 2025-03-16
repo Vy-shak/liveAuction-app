@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 function Progressdiv() {
     const {count} = useCount();
-    const[progress,setProgress] = useState([1,2,3,4])
+    const[progress] = useState([1,2,3,4])
   return (
     <div className='flex absolute top-32 left-20 flexCenter gap-x-4 w-fit h-fit'>
         {progress.map((item,index)=>(

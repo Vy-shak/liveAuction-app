@@ -4,7 +4,7 @@ import {motion} from "motion/react"
 import Image from 'next/image'
 import { Button } from '../ui/button'
 import { useRef,useState } from 'react'
-import { supabase, avatarsPublicurl } from "../../lib/supabase/supabaseClient"
+import { supabase,  } from "../../lib/supabase/supabaseClient"
 import { useUserStore } from '@/lib/stateStore'
 
 type Profile = {

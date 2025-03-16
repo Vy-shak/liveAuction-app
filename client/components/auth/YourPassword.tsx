@@ -4,7 +4,6 @@ import { Input,Button } from '../index'
 import { useUserStore ,useCount} from '../../lib/stateStore/index';
 import { useRef } from 'react';
 import { motion } from "motion/react"
-import axios from 'axios';
 
 
 function YourPassword() {

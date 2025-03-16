@@ -1,6 +1,6 @@
 "use client"
-import React, { useEffect } from 'react'
-import { Input,Button,Textarea } from '../index'
+import React  from 'react'
+import { Input,Button } from '../index'
 import useAuctiondata from '@/lib/stateStore/auctionDetails'
 import { useRef } from 'react'
 import useSellCount from '@/lib/stateStore/sellCount'
