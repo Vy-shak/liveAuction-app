@@ -1,8 +1,12 @@
 import { WebSocketServer } from 'ws';
 import { roomManager } from './roomManager';
 import { authCheck } from './authCheck';
+import dotenv from "dotenv"
+dotenv.config()
 
-const wss = new WebSocketServer({ port: 8080 });
+const port = Number(process.env.PORT)
+
+const wss = new WebSocketServer({ port: port});
 
 const auctionManager = new roomManager();
 
