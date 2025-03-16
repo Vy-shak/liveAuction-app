@@ -32,8 +32,8 @@ function RegisteredCard({ imgUrl, brand, item, model, endDate, startDate }: regi
     setUpdate(true);
   }
   return (
-    <Link className='w-full pr-4' href={"/dashboard/view"}>
-      <div onClick={viewAuction} className='w-full flexCenter rounded-md bg-white px-8 py-4'>
+    <Link className='w-full' href={"/dashboard/view"}>
+      <div onClick={viewAuction} className='w-full flexCenter rounded-md bg-white'>
         <div className='w-full flexStart flex-col'>
           <div className='w-fit h-fit flexCenter gap-y-2 flex-col'>
             <Image className='rounded-lg flex-shrink-0 overflow-hidden w-24 h-20 object-cover' width={100} height={50} alt='vehicle image' src={imgUrl} />
