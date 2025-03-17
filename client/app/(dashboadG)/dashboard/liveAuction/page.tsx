@@ -43,7 +43,7 @@ function page() {
         return 
       };
 
-      const ws = new WebSocket(`ws://localhost:8080?token=${token}&auctionCode=${auctionId}`);
+      const ws = new WebSocket(`${process.env.NEXT_PUBLIC_WS_URL}?token=${token}&auctionCode=${auctionId}`);
       ws.onopen = function(){
         setSocket(ws)
       }
