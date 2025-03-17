@@ -80,8 +80,10 @@ class roomManager {
             const priceData = { type: "price", priceList: (_d = this.auctionStore.get(auctionId)) === null || _d === void 0 ? void 0 : _d.price };
             const strMembers = JSON.stringify(membersData);
             const strPrices = JSON.stringify(priceData);
-            socket.send(strMembers);
-            socket.send(strPrices);
+            updatedMembers.map((item) => {
+                item.socket.send(strMembers);
+                item.socket.send(strPrices);
+            });
         }
         ;
         // console.log(this.auctionStore)
@@ -103,8 +105,7 @@ class roomManager {
             socket.send(JSON.stringify(errMsg));
             return;
         }
-        if (existingPrices && price <= existingPrices[n - 1].price) {
-            console.log(existingPrices[n - 1].price, price);
+        if (!existingPrices) {
             let errMsg = { type: "error", err: "the bidding price is smaller than the current one" };
             socket.send(JSON.stringify(errMsg));
             return;
@@ -116,7 +117,9 @@ class roomManager {
         this.auctionStore.set(auctionId, { members: existingMembers, price: newPrice });
         const priceList = (_c = this.auctionStore.get(auctionId)) === null || _c === void 0 ? void 0 : _c.price;
         const priceData = { type: 'price', priceList: priceList };
-        socket.send(JSON.stringify(priceData));
+        existingMembers.map((item) => {
+            item.socket.send(JSON.stringify(priceData));
+        });
     }
 }
 exports.roomManager = roomManager;

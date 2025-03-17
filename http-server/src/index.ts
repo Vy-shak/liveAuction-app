@@ -13,6 +13,6 @@ app.use('/api/v1/user', userRouter)
 app.use('/api/v1/auctions', auctionRouter)
 
 
-app.listen(process.env.PORT,()=>{
+app.listen(process.env.PORT||3001,()=>{
     console.log("server is listening on port"+process.env.PORT)
 })

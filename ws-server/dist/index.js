@@ -8,11 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const ws_1 = require("ws");
 const roomManager_1 = require("./roomManager");
 const authCheck_1 = require("./authCheck");
-const wss = new ws_1.WebSocketServer({ port: 8080 });
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const port = Number(process.env.PORT);
+const wss = new ws_1.WebSocketServer({ port: port || 8080 });
 const auctionManager = new roomManager_1.roomManager();
 wss.on('connection', function connection(socket, req) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -23,7 +29,7 @@ wss.on('connection', function connection(socket, req) {
         const urlParams = new URLSearchParams(req.url.split('?')[1]);
         const token = urlParams.get('token');
         let auctioncode = urlParams.get('auctionCode');
-        console.log("hyyy", auctioncode);
+        console.log("hyyyd", auctioncode);
         const auctionId = Number(auctioncode);
         if (!token) {
             const errMsg = { type: 'error', err: "the jwt token not present" };

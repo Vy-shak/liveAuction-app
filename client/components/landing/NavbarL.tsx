@@ -29,11 +29,12 @@ function NavBarL() {
             </Link>
           </nav>
           <div className="hidden md:flex items-center gap-4">
-            <Link href="#" className="text-sm font-medium hover:text-green-600 transition-colors">
+            <Link href={"/login"} className="text-sm font-medium hover:text-green-600 transition-colors">
               Sign In
             </Link>
+            <Link href={"/verify"}>
             <Button className="bg-green-600 hover:bg-green-700">Register</Button>
-          </div>
+            </Link>          </div>
 
           {/* Mobile menu button */}
           <Button

@@ -6,7 +6,7 @@ dotenv.config()
 
 const port = Number(process.env.PORT)
 
-const wss = new WebSocketServer({ port: port});
+const wss = new WebSocketServer({ port: port||8080});
 
 const auctionManager = new roomManager();
 
