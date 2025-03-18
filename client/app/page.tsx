@@ -1,4 +1,4 @@
-import { NavBarL,HeroL } from "../components/index";
+import { NavBarL,HeroL,Features } from "../components/index";
 
 
 export default function Home() {
@@ -9,6 +9,9 @@ export default function Home() {
       </section>
       <section className="w-full px-4 sm:px-6 md:px-12 lg:px-16">
       <HeroL/>
+      </section>
+      <section className="w-full px-4 sm:px-6 md:px-12 lg:px-16">
+      <Features/>
       </section>
     </section>
   );

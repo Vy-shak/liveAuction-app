@@ -20,6 +20,7 @@ import { Textarea } from "./ui/textarea"
 import { Infocard } from "./viewAuction/Infocard"
 import { NavBarL } from "./landing/NavbarL"
 import HeroL from "./landing/HeroL"
+import Features from "./landing/Features"
 
 
-export {Button,Input, NavBarL, HeroL, Infocard,YourName,Userprofile, Textarea, Auctioncard, RenderAuctions, VehicleImg, Vehicledetails, AuctionName, Sidebarmenu,NavbarD, Sidebar, Signinform, Navbar,Progressdiv,YourEmail,YourPassword,YourProfile}
+export {Button,Input, NavBarL, HeroL, Features, Infocard,YourName,Userprofile, Textarea, Auctioncard, RenderAuctions, VehicleImg, Vehicledetails, AuctionName, Sidebarmenu,NavbarD, Sidebar, Signinform, Navbar,Progressdiv,YourEmail,YourPassword,YourProfile}
