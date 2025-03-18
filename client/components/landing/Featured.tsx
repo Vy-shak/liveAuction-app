@@ -19,7 +19,6 @@ function Featured() {
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {/* Auction Item 1 */}
         <Card className="overflow-hidden">
           <div className="relative">
             <Image
@@ -50,7 +49,6 @@ function Featured() {
           </CardContent>
         </Card>
 
-        {/* Auction Item 2 */}
         <Card className="overflow-hidden">
           <div className="relative">
             <Image
@@ -83,7 +81,6 @@ function Featured() {
           </CardContent>
         </Card>
 
-        {/* Auction Item 3 */}
         <Card className="overflow-hidden">
           <div className="relative">
             <Image

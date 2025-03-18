@@ -20,6 +20,11 @@ interface updatePrice {
     auctionId:number
 }
 
+interface leave {
+    userId:number,
+    auctionId:number,
+}
+
 export class roomManager {
     private auctionStore: Map<number,auctions>;
     private prisma = new PrismaClient();
@@ -136,6 +141,22 @@ export class roomManager {
         existingMembers.map((item)=>{
             item.socket.send(JSON.stringify(priceData))
         })
+    }
+
+    Leave ({userId,auctionId}:leave) {
+        const existingMembers = this.auctionStore.get(auctionId)?.members;
+        const existingPrice = this.auctionStore.get(auctionId)?.price;
+
+        if (!existingMembers) {
+            return
+        }
+        if (!existingPrice) {
+            return
+        }
+
+        const updatedMembers = existingMembers?.filter((item)=>item.userId!==userId);
+
+        this.auctionStore.set(auctionId,{members:updatedMembers,price:existingPrice})
     }
 }
 
