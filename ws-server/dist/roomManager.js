@@ -105,7 +105,7 @@ class roomManager {
             socket.send(JSON.stringify(errMsg));
             return;
         }
-        if (!existingPrices[n - 1]) {
+        if (existingPrices[n - 1].price >= price) {
             let errMsg = { type: "error", err: "the bidding price is smaller than the current one" };
             socket.send(JSON.stringify(errMsg));
             return;
