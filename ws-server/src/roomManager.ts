@@ -155,8 +155,11 @@ export class roomManager {
         }
 
         const updatedMembers = existingMembers?.filter((item)=>item.userId!==userId);
-
-        this.auctionStore.set(auctionId,{members:updatedMembers,price:existingPrice})
+        this.auctionStore.set(auctionId,{members:updatedMembers,price:existingPrice});
+        console.log("removed you")
+        updatedMembers.map((item)=>{
+            item.socket.send(updatedMembers)
+        })
     }
 }
 

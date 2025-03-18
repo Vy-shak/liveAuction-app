@@ -72,6 +72,10 @@ wss.on('connection', function connection(socket, req) {
                 const { price, profileUrl, userId, auctionId, fullname } = Message;
                 auctionManager.updatePrice({ price, socket, userId, profileUrl, auctionId, fullname });
             }
+            if (Message.type == "leaveRoom") {
+                const { userId, auctionId } = Message;
+                auctionManager.Leave({ userId, auctionId });
+            }
         });
     });
 });

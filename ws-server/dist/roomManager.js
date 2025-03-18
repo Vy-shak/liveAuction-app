@@ -122,5 +122,22 @@ class roomManager {
             item.socket.send(JSON.stringify(priceData));
         });
     }
+    Leave({ userId, auctionId }) {
+        var _a, _b;
+        const existingMembers = (_a = this.auctionStore.get(auctionId)) === null || _a === void 0 ? void 0 : _a.members;
+        const existingPrice = (_b = this.auctionStore.get(auctionId)) === null || _b === void 0 ? void 0 : _b.price;
+        if (!existingMembers) {
+            return;
+        }
+        if (!existingPrice) {
+            return;
+        }
+        const updatedMembers = existingMembers === null || existingMembers === void 0 ? void 0 : existingMembers.filter((item) => item.userId !== userId);
+        this.auctionStore.set(auctionId, { members: updatedMembers, price: existingPrice });
+        console.log("removed you");
+        updatedMembers.map((item) => {
+            item.socket.send(updatedMembers);
+        });
+    }
 }
 exports.roomManager = roomManager;
