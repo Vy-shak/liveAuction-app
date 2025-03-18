@@ -4,6 +4,7 @@ import { Input } from '../ui/input'
 import myUserstore from '@/lib/stateStore/myUserdetails'
 import auctionPrice from '@/lib/stateStore/auctionPrice'
 import { useRef } from 'react'
+import { toast } from 'sonner'
 
 interface biddingDetails {
     auctionId:number,
@@ -21,9 +22,14 @@ function BiddingCard({auctionId,socket}:biddingDetails) {
             console.log("returning")
             return
         }
-        const priceData = {type:"price",fullname:myuser.fullname,userId:myuser.userId,auctionId,profileUrl:myuser.profileUrl,price:myPriceRef.current?.value};
-        socket.send(JSON.stringify(priceData))
+        if(priceData?.price>=Number(myPriceRef.current?.value)){
+            toast.warning(`your price is less than current bidding price`);
+            return
+        }
+        const myPrice = {type:"price",fullname:myuser.fullname,userId:myuser.userId,auctionId,profileUrl:myuser.profileUrl,price:myPriceRef.current?.value};
+        socket.send(JSON.stringify(myPrice))
     }
+
     return (
         <div className='w-full bg-white py-16 rounded-lg flexCenter'>
             <div className='flexCenter flex-col gap-y-2'>
