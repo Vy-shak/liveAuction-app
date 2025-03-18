@@ -6,10 +6,12 @@ import { Button } from '../../components/index';
 import UseUserStore from '@/lib/stateStore/userStore';
 import UseCount from '@/lib/stateStore/dataCount';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 export default function Authpage() {
     const {count} = UseCount();
     const {userData} = UseUserStore();
+    const Router = useRouter();
     console.log(userData)
 
     console.log("url",process.env.NEXT_PUBLIC_HTTP_URL)
@@ -27,7 +29,9 @@ export default function Authpage() {
             return
         }
         const {data} = await axios.post(`${url}user/signup`,{fullname, email, password, profileUrl});
-        console.log(data)
+        if (data) {
+            Router.push("/dashboard/login")
+        }
     }
 
     
