@@ -105,7 +105,7 @@ class roomManager {
             socket.send(JSON.stringify(errMsg));
             return;
         }
-        if (!existingPrices) {
+        if (!existingPrices[n - 1]) {
             let errMsg = { type: "error", err: "the bidding price is smaller than the current one" };
             socket.send(JSON.stringify(errMsg));
             return;
@@ -115,6 +115,7 @@ class roomManager {
         }
         const newPrice = [...existingPrices, { price: price, fullname: fullname, profileUrl: profileUrl, userId: userId }];
         this.auctionStore.set(auctionId, { members: existingMembers, price: newPrice });
+        console.log("the n", existingPrices[n - 1]);
         const priceList = (_c = this.auctionStore.get(auctionId)) === null || _c === void 0 ? void 0 : _c.price;
         const priceData = { type: 'price', priceList: priceList };
         existingMembers.map((item) => {
