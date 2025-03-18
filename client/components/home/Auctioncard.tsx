@@ -2,9 +2,13 @@
 import React from 'react'
 import Image from 'next/image'
 import { Button } from '../ui/button';
+import { Badge } from 'lucide-react';
+import { Clock } from 'lucide-react';
 import { convertUtcToLocal } from '@/app/utils/timeConvert';
 import { UseSelectedAuction } from '@/lib/stateStore/auctionsList';
 import Link from 'next/link';
+import { Card, CardContent } from '../ui/card';
+import { useRouter } from 'next/navigation';
 
 type auctionData = {
     brand: string,
@@ -16,11 +20,12 @@ type auctionData = {
     endDate: string,
     price: number,
     selection: any
-    auctionName:string
+    auctionName: string
 };
 
 function Auctioncard({ price, auctionName, selection, startDate, endDate, model, photo, brand, year, kmCovered }: auctionData) {
-    const { updateSelection } = UseSelectedAuction()
+    const { updateSelection } = UseSelectedAuction();
+    const Router = useRouter()
     const handleSelection = () => {
         updateSelection(selection)
     }
@@ -30,33 +35,38 @@ function Auctioncard({ price, auctionName, selection, startDate, endDate, model,
 
     return (
         <Link href={"/dashboard/view"}>
-                <div onClick={handleSelection} className='w-full bg-white pt-6 px-4 flex justify-start rounded-lg items-start flex-col' >
-            <div className='w-full flex justify-start items-start gap-y-2 flex-col'>
-                <h3 className='text-lg font-bold'>{auctionName}</h3>
-                <div className='w-full overflow-hidden rounded-lg h-40 '>
-                    {photo && <Image className='w-full h-full object-cover' width={200} height={500} alt='vehicle Img' src={photo} />}
+            <Card onClick={handleSelection} className="overflow-hidden  min-w-96">
+                <div className="relative w-full">
+                    <Image
+                        src={photo}
+                        width={500}
+                        height={300}
+                        alt="1967 Porsche 911"
+                        className="w-full h-[200px] object-cover"
+                    />
+                    <Badge className="absolute top-3 right-3 bg-green-600">Active</Badge>
                 </div>
-            </div>
-            <div className='w-full flex justify-between items-center'>
-                <div className='w-fit flex justify-between flex-col items-start'>
-                    <div className='w-fit h-fit flex flex-col justify-start items-start'>
-                        <h4 className='font-bold text-neutral-800'>{`${brand} ${model}`}</h4>
-                        <span className='font-light text-neutral-600 text-xs'>{`${year}-${kmCovered}`}</span>
-                    </div>
-                    <div className='w-fit h-fit flexCenter gap-x-4'>
-                        <div className='flex justify-start items-start flex-col w-fit'>
-                            <span className='font-semibold text-neutral-500 text-xs'>start in</span>
-                            <span className='font-normal text-neutral-600 text-xs'>{startDate}</span>
+                <CardContent className="p-6 w-full">
+                    <div className="flex w-full justify-between items-center mb-3">
+                        <div className='flexStart flex-col w-full'>
+                            <span className='text-xl  font-semibold'>{auctionName}</span>
+                            <h3 className="text-md text-neutral-800 font-semibold">{`${year} ${brand} ${model}`}</h3>
                         </div>
-                        <div className='flex justify-start items-start  flex-col w-fit'>
-                            <span className='font-semibold text-neutral-500 text-xs'>ends in</span>
-                            <span className='font-normal text-neutral-600 text-xs'>{startDate}</span>
+                        <div className="flex items-center gap-1 text-green-600">
+                            <Clock className="h-4 w-4" />
+                            <span className="text-sm font-medium whitespace-nowrap">2d 14h</span>
                         </div>
                     </div>
-                </div>
-                <Button>{price}</Button>
-            </div>
-        </div>
+                    <p className="text-muted-foreground mb-4">{kmCovered}km</p>
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <p className="text-sm text-muted-foreground">Current Bid</p>
+                            <p className="text-xl font-bold">{price} INR</p>
+                        </div>
+                        <Button  className="bg-green-600 hover:bg-green-700">Bid Now</Button>
+                    </div>
+                </CardContent>
+            </Card>
         </Link>
     )
 }

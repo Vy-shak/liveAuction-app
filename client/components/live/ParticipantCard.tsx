@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from '../ui/button'
 import Members from './Members'
+import { useRouter } from 'next/navigation'
 
 interface members {
   fullname:string,
@@ -18,7 +19,7 @@ interface membersList {
 
 
 function ParticipantCard({allMembers,socket,userId,auctionId}:membersList) {
-
+  const Router = useRouter();
   const LeaveRoom = ()=>{
      if (!socket||!userId!||!auctionId) {
         console.log("bad props");
@@ -26,7 +27,8 @@ function ParticipantCard({allMembers,socket,userId,auctionId}:membersList) {
      };
 
      const metaData = {type:"leaveRoom",userId:userId,auctionId:auctionId};
-     socket.send(JSON.stringify(metaData))
+     socket.send(JSON.stringify(metaData));
+     Router.push("dashboard/home")
   }
   return (
     <div className='w-full bg-white flexStart flex-col gap-y-3 rounded-lg px-5 py-4'>
