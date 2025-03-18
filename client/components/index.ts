@@ -21,6 +21,7 @@ import { Infocard } from "./viewAuction/Infocard"
 import { NavBarL } from "./landing/NavbarL"
 import HeroL from "./landing/HeroL"
 import Features from "./landing/Features"
+import Featured from "./landing/Featured"
 
 
-export {Button,Input, NavBarL, HeroL, Features, Infocard,YourName,Userprofile, Textarea, Auctioncard, RenderAuctions, VehicleImg, Vehicledetails, AuctionName, Sidebarmenu,NavbarD, Sidebar, Signinform, Navbar,Progressdiv,YourEmail,YourPassword,YourProfile}
+export {Button,Input, NavBarL, Featured, HeroL, Features, Infocard,YourName,Userprofile, Textarea, Auctioncard, RenderAuctions, VehicleImg, Vehicledetails, AuctionName, Sidebarmenu,NavbarD, Sidebar, Signinform, Navbar,Progressdiv,YourEmail,YourPassword,YourProfile}
