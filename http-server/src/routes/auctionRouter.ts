@@ -14,7 +14,13 @@ const JWT_SECRET = process.env.JWT_SECRET
 enum types {
     bike = "BIKE",
     car = "CAR"
-  }
+}
+
+auctionRouter.get("/render",(req:Request,res:Response)=>{
+    res.status(200).send({
+        msg:"we got you"
+    })
+})
 
 
 auctionRouter.post("/createAuction",authmiddleware,async (req:Request,res:Response)=>{
