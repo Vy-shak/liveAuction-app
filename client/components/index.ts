@@ -23,6 +23,7 @@ import HeroL from "./landing/HeroL"
 import Features from "./landing/Features"
 import Featured from "./landing/Featured"
 import HowitWorks from "./landing/HowitWorks"
+import Signinform2 from "./auth/Signinform2"
 
 
-export {Button,Input, NavBarL, HowitWorks, Featured, HeroL, Features, Infocard,YourName,Userprofile, Textarea, Auctioncard, RenderAuctions, VehicleImg, Vehicledetails, AuctionName, Sidebarmenu,NavbarD, Sidebar, Signinform, Navbar,Progressdiv,YourEmail,YourPassword,YourProfile}
+export {Button,Input, NavBarL, HowitWorks, Signinform2, Featured, HeroL, Features, Infocard,YourName,Userprofile, Textarea, Auctioncard, RenderAuctions, VehicleImg, Vehicledetails, AuctionName, Sidebarmenu,NavbarD, Sidebar, Signinform, Navbar,Progressdiv,YourEmail,YourPassword,YourProfile}

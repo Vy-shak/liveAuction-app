@@ -28,6 +28,11 @@ var types;
     types["bike"] = "BIKE";
     types["car"] = "CAR";
 })(types || (types = {}));
+auctionRouter.get("/render", (req, res) => {
+    res.status(200).send({
+        msg: "we got you"
+    });
+});
 auctionRouter.post("/createAuction", auth_1.authmiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { auctionName, brand, discription, startDate, endDate, price, kmCovered, mileage, model, ownership, photos, type, year } = req.body;
     console.log(startDate, endDate);
