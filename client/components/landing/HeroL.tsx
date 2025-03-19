@@ -27,12 +27,12 @@ function HeroL() {
               The premier destination for collectors and enthusiasts to find rare and exceptional vintage vehicles.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mt-4">
-              <Link href={"/create"}>
+              <Link href={"/verify"}>
                 <Button size="lg" className="bg-green-600 hover:bg-green-700">
                   Explore Auctions
                 </Button>
               </Link>
-              <Link href={"/create"}>
+              <Link href={"/verify"}>
               <Button size="lg" variant="outline">
                 How It Works
               </Button>
