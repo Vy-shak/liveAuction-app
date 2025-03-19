@@ -30,7 +30,7 @@ export default function Authpage() {
         }
         const {data} = await axios.post(`${url}user/signup`,{fullname, email, password, profileUrl});
         if (data) {
-            Router.push("/dashboard/login")
+            Router.push("/login")
         }
     }
 

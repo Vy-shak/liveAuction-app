@@ -4,6 +4,7 @@ import { Input,Button } from '../index'
 import { useUserStore ,useCount} from '../../lib/stateStore/index';
 import { useRef } from 'react';
 import { motion } from "motion/react"
+import { toast } from 'sonner';
 
 
 function YourPassword() {
@@ -17,8 +18,8 @@ function YourPassword() {
 
     const UploadName = () => {
         if (PasswordRef.current?.value!==ConfirmPassref.current?.value!) {
-            console.log("password is not similar")
-            return
+          toast.warning("passwords does not match")
+          return
         }
         if (PasswordRef.current?.value) {
             updateUserData({ type: 'password', val: PasswordRef.current?.value });
